@@ -1,11 +1,19 @@
 'use client'
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { useField, NumberField } from '@payloadcms/ui'
 import { NumberFieldClientComponent } from 'payload'
 
 const CustomVNDField: NumberFieldClientComponent = ({ path, field, ...props }) => {
   const { value, setValue } = useField({ path })
+
+  const vnd = useMemo(() => {
+    const result = String(value)
+
+    return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(
+      parseFloat(result),
+    )
+  }, [value])
 
   return (
     <div
@@ -23,13 +31,7 @@ const CustomVNDField: NumberFieldClientComponent = ({ path, field, ...props }) =
       >
         <NumberField {...props} field={field} path={path} />
       </div>
-      <p style={{ marginTop: '10px' }}>
-        ={' '}
-        {value &&
-          Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(
-            parseFloat(value),
-          )}
-      </p>
+      <p style={{ marginTop: '10px' }}>= {vnd}</p>
     </div>
   )
 }
