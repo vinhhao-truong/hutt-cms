@@ -64,17 +64,31 @@ export interface Config {
   auth: {
     users: UserAuthOperations;
   };
+  blocks: {};
   collections: {
     users: User;
     media: Media;
+    products: Product;
+    brands: Brand;
+    categories: Category;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsJoins: {};
+  collectionsJoins: {
+    brands: {
+      productList: 'products';
+    };
+    categories: {
+      productList: 'products';
+    };
+  };
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    products: ProductsSelect<false> | ProductsSelect<true>;
+    brands: BrandsSelect<false> | BrandsSelect<true>;
+    categories: CategoriesSelect<false> | CategoriesSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -149,6 +163,94 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "products".
+ */
+export interface Product {
+  id: number;
+  productName: string;
+  productCode?: string | null;
+  brand?: (number | null) | Brand;
+  category?: (number | null) | Category;
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  specifications?: {
+    weight?: number | null;
+    height?: number | null;
+    capacity?: number | null;
+    aboveRadius?: number | null;
+    belowRadius?: number | null;
+    thickness?: number | null;
+  };
+  enableVariations?: boolean | null;
+  costs?: {
+    productCost: number;
+    packageCost: number;
+  };
+  prices?: {
+    grossPrice: number;
+    netPrice?: number | null;
+  };
+  variations?:
+    | {
+        variationName?: string | null;
+        costsVariation?: {
+          productCostVariation: number;
+          packageCostVariation: number;
+        };
+        pricesVariation?: {
+          grossPriceVariation: number;
+          netPriceVariation?: number | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "brands".
+ */
+export interface Brand {
+  id: number;
+  brandName: string;
+  brandCode?: string | null;
+  productList?: {
+    docs?: (number | Product)[] | null;
+    hasNextPage?: boolean | null;
+  } | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories".
+ */
+export interface Category {
+  id: number;
+  categoryName?: string | null;
+  productList?: {
+    docs?: (number | Product)[] | null;
+    hasNextPage?: boolean | null;
+  } | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -161,6 +263,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'products';
+        value: number | Product;
+      } | null)
+    | ({
+        relationTo: 'brands';
+        value: number | Brand;
+      } | null)
+    | ({
+        relationTo: 'categories';
+        value: number | Category;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -236,6 +350,81 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "products_select".
+ */
+export interface ProductsSelect<T extends boolean = true> {
+  productName?: T;
+  productCode?: T;
+  brand?: T;
+  category?: T;
+  description?: T;
+  specifications?:
+    | T
+    | {
+        weight?: T;
+        height?: T;
+        capacity?: T;
+        aboveRadius?: T;
+        belowRadius?: T;
+        thickness?: T;
+      };
+  enableVariations?: T;
+  costs?:
+    | T
+    | {
+        productCost?: T;
+        packageCost?: T;
+      };
+  prices?:
+    | T
+    | {
+        grossPrice?: T;
+        netPrice?: T;
+      };
+  variations?:
+    | T
+    | {
+        variationName?: T;
+        costsVariation?:
+          | T
+          | {
+              productCostVariation?: T;
+              packageCostVariation?: T;
+            };
+        pricesVariation?:
+          | T
+          | {
+              grossPriceVariation?: T;
+              netPriceVariation?: T;
+            };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "brands_select".
+ */
+export interface BrandsSelect<T extends boolean = true> {
+  brandName?: T;
+  brandCode?: T;
+  productList?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories_select".
+ */
+export interface CategoriesSelect<T extends boolean = true> {
+  categoryName?: T;
+  productList?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
