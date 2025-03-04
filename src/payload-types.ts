@@ -71,6 +71,7 @@ export interface Config {
     products: Product;
     brands: Brand;
     categories: Category;
+    subcategories: Subcategory;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -79,7 +80,8 @@ export interface Config {
     brands: {
       productList: 'products';
     };
-    categories: {
+    subcategories: {
+      category: 'categories';
       productList: 'products';
     };
   };
@@ -89,6 +91,7 @@ export interface Config {
     products: ProductsSelect<false> | ProductsSelect<true>;
     brands: BrandsSelect<false> | BrandsSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
+    subcategories: SubcategoriesSelect<false> | SubcategoriesSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -96,8 +99,12 @@ export interface Config {
   db: {
     defaultIDType: number;
   };
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    homePage: HomePage;
+  };
+  globalsSelect: {
+    homePage: HomePageSelect<false> | HomePageSelect<true>;
+  };
   locale: null;
   user: User & {
     collection: 'users';
@@ -166,11 +173,11 @@ export interface Media {
  * via the `definition` "products".
  */
 export interface Product {
-  id: number;
+  id: string;
   productName: string;
   productCode?: string | null;
   brand?: (number | null) | Brand;
-  category?: (number | null) | Category;
+  category?: (number | Subcategory)[] | null;
   description: {
     root: {
       type: string;
@@ -195,6 +202,7 @@ export interface Product {
     thickness?: number | null;
   };
   enableVariations?: boolean | null;
+  isActive?: boolean | null;
   costs?: {
     productCost: number;
     packageCost: number;
@@ -229,9 +237,30 @@ export interface Brand {
   brandName: string;
   brandCode?: string | null;
   productList?: {
-    docs?: (number | Product)[] | null;
-    hasNextPage?: boolean | null;
-  } | null;
+    docs?: (string | Product)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "subcategories".
+ */
+export interface Subcategory {
+  id: number;
+  subcategoryName?: string | null;
+  category?: {
+    docs?: (number | Category)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  productList?: {
+    docs?: (string | Product)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -242,10 +271,8 @@ export interface Brand {
 export interface Category {
   id: number;
   categoryName?: string | null;
-  productList?: {
-    docs?: (number | Product)[] | null;
-    hasNextPage?: boolean | null;
-  } | null;
+  subcategoryList?: (number | Subcategory)[] | null;
+  slug?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -266,7 +293,7 @@ export interface PayloadLockedDocument {
       } | null)
     | ({
         relationTo: 'products';
-        value: number | Product;
+        value: string | Product;
       } | null)
     | ({
         relationTo: 'brands';
@@ -275,6 +302,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'categories';
         value: number | Category;
+      } | null)
+    | ({
+        relationTo: 'subcategories';
+        value: number | Subcategory;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -356,6 +387,7 @@ export interface MediaSelect<T extends boolean = true> {
  * via the `definition` "products_select".
  */
 export interface ProductsSelect<T extends boolean = true> {
+  id?: T;
   productName?: T;
   productCode?: T;
   brand?: T;
@@ -372,6 +404,7 @@ export interface ProductsSelect<T extends boolean = true> {
         thickness?: T;
       };
   enableVariations?: T;
+  isActive?: T;
   costs?:
     | T
     | {
@@ -422,6 +455,18 @@ export interface BrandsSelect<T extends boolean = true> {
  */
 export interface CategoriesSelect<T extends boolean = true> {
   categoryName?: T;
+  subcategoryList?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "subcategories_select".
+ */
+export interface SubcategoriesSelect<T extends boolean = true> {
+  subcategoryName?: T;
+  category?: T;
   productList?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -457,6 +502,50 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "homePage".
+ */
+export interface HomePage {
+  id: number;
+  introduction?: {
+    shortIntro?: string | null;
+    ourMission?: string | null;
+  };
+  featuredCategories?: {
+    categories?: (number | Category)[] | null;
+  };
+  shopAllBanner?: {
+    caption?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "homePage_select".
+ */
+export interface HomePageSelect<T extends boolean = true> {
+  introduction?:
+    | T
+    | {
+        shortIntro?: T;
+        ourMission?: T;
+      };
+  featuredCategories?:
+    | T
+    | {
+        categories?: T;
+      };
+  shopAllBanner?:
+    | T
+    | {
+        caption?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

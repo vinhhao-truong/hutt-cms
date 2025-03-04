@@ -1,42 +1,58 @@
-import { CollectionConfig, Field } from 'payload'
+import formatTextToSlug from "@/frontend-src/libs/utils/format/formatTextToSlug";
+import { CollectionConfig, Field } from "payload";
 
 const Categories: CollectionConfig = {
-  slug: 'categories',
+  slug: "categories",
   admin: {
-    useAsTitle: 'categoryName',
+    useAsTitle: "categoryName",
     group: {
-      en: 'Product Management',
-      vi: 'Quản Lý Sản Phẩm',
+      en: "Product Management",
+      vi: "Quản Lý Sản Phẩm",
     },
   },
   labels: {
     plural: {
-      en: 'Categories',
-      vi: 'Tất Cả Danh Mục',
+      en: "Categories",
+      vi: "Tất Cả Danh Mục Cha",
     },
     singular: {
-      en: 'Category',
-      vi: 'Danh Mục',
+      en: "Category",
+      vi: "Danh Mục Cha",
     },
   },
   fields: [
     {
-      name: 'categoryName',
-      type: 'text',
+      name: "categoryName",
+      type: "text",
       unique: true,
       label: {
-        en: 'Category Name',
-        vi: 'Tên Danh Mục',
+        en: "Category Name",
+        vi: "Tên Danh Mục Cha",
       },
     },
     {
-      name: 'productList',
-      type: 'join',
-      collection: 'products',
-      on: 'category',
+      name: "subcategoryList",
+      type: "relationship",
+      relationTo: "subcategories",
+      hasMany: true,
       label: {
-        en: 'Product List',
-        vi: 'Danh Sách Sản Phẩm',
+        en: "Subcategory List",
+        vi: "Danh Sách Danh Mục Con",
+      },
+    },
+    {
+      name: "slug",
+      type: "text",
+      unique: true,
+      admin: {
+        hidden: true,
+      },
+      hooks: {
+        afterRead: [
+          ({ data }) => {
+            return formatTextToSlug(data?.categoryName);
+          },
+        ],
       },
     },
     // {
@@ -62,6 +78,6 @@ const Categories: CollectionConfig = {
     //   ],
     // },
   ],
-}
+};
 
-export default Categories
+export default Categories;

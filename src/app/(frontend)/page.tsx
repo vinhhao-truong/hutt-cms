@@ -1,59 +1,46 @@
-import { headers as getHeaders } from 'next/headers.js'
-import Image from 'next/image'
-import { getPayload } from 'payload'
-import React from 'react'
-import { fileURLToPath } from 'url'
+import { getPayload } from "payload";
+import React from "react";
+import config from "@/payload.config";
+import Image from "next/image";
+import HomeHeroBanner from "@/frontend-src/components/pages/home/HeroBanner";
+import { HomePage as HomePageTypes, Product } from "@/payload-types";
+import FeaturedCategories from "@/frontend-src/components/pages/home/FeaturedCategories";
+import Introduction from "@/frontend-src/components/pages/home/Introduction";
+import AllCategories from "@/frontend-src/components/pages/home/AllCategories";
 
-import config from '@/payload.config'
-import './styles.scss'
+export interface HomePageDataTypes
+  extends Omit<HomePageTypes, "featuredCategories"> {
+  featuredCategories?: {
+    // categories?: (number | Category)[] | null;
+    categories?: {
+      [key: string]: { slug?: string; products?: Product[] };
+    };
+  };
+  allCategories?: {
+    // categories?: (number | Category)[] | null;
+    categories?: {
+      [key: string]: Product[];
+    };
+  };
+}
 
-export default async function HomePage() {
-  const headers = await getHeaders()
-  const payloadConfig = await config
-  const payload = await getPayload({ config: payloadConfig })
-  const { user } = await payload.auth({ headers })
-
-  const fileURL = `vscode://file/${fileURLToPath(import.meta.url)}`
+const HomePage = async () => {
+  const payloadConfig = await config;
+  const payload = await getPayload({ config: payloadConfig });
+  const homePageData = await payload.findGlobal({
+    slug: "homePage",
+  });
 
   return (
-    <div className="home">
-      <div className="content">
-        <picture>
-          <source srcSet="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-favicon.svg" />
-          <Image
-            alt="Payload Logo"
-            height={65}
-            src="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-favicon.svg"
-            width={65}
-          />
-        </picture>
-        {!user && <h1>Welcome to your new project.</h1>}
-        {user && <h1>Welcome back, {user.email}</h1>}
-        <div className="links">
-          <a
-            className="admin"
-            href={payloadConfig.routes.admin}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Go to admin panel
-          </a>
-          <a
-            className="docs"
-            href="https://payloadcms.com/docs"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Documentation
-          </a>
-        </div>
-      </div>
-      <div className="footer">
-        <p>Update this page by editing</p>
-        <a className="codeLink" href={fileURL}>
-          <code>app/(frontend)/page.tsx</code>
-        </a>
-      </div>
+    <div className="flex flex-col gap-10">
+      <HomeHeroBanner data={homePageData.shopAllBanner} />
+      <Introduction data={homePageData["introduction"]} />
+      <FeaturedCategories
+        data={(homePageData as HomePageDataTypes).featuredCategories}
+      />
+      <AllCategories data={(homePageData as HomePageDataTypes).allCategories} />
     </div>
-  )
-}
+  );
+};
+
+export default HomePage;
