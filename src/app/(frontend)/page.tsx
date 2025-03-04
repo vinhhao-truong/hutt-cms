@@ -1,7 +1,6 @@
 import { getPayload } from "payload";
 import React from "react";
 import config from "@/payload.config";
-import Image from "next/image";
 import HomeHeroBanner from "@/frontend-src/components/pages/home/HeroBanner";
 import { HomePage as HomePageTypes, Product } from "@/payload-types";
 import FeaturedCategories from "@/frontend-src/components/pages/home/FeaturedCategories";

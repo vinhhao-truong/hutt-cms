@@ -2,9 +2,8 @@
 
 import { Product } from "@/payload-types";
 import Image from "next/image";
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import Slider from "react-slick";
-import { v4 } from "uuid";
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
 import color from "@/frontend-src/libs/constants/color";
@@ -97,27 +96,23 @@ const RenderedCarousel = ({
 };
 
 const ProductCarousel: React.FC<{ data: Product[] }> = ({ data }) => {
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+
   if (data.length === 0) {
     return <></>;
   }
 
   const MotionLink = motion.create(Link);
 
-  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
-
-  const hIdxMemo = useMemo(() => {
-    return hoveredIdx;
-  }, [hoveredIdx]);
-
   return (
     <RenderedCarousel length={data.length}>
       {data.map((p, idx) => {
         const key = `featured-${p.id}-${idx}`;
-        const isHovered = hIdxMemo === idx;
+        const isHovered = hoveredIdx === idx;
         const isLeft =
-          hIdxMemo && hIdxMemo > 0
-            ? hIdxMemo - 1 === idx
-            : hIdxMemo && hIdxMemo === 0 && idx === data.length - 1
+          hoveredIdx && hoveredIdx > 0
+            ? hoveredIdx - 1 === idx
+            : hoveredIdx && hoveredIdx === 0 && idx === data.length - 1
               ? true
               : false;
 
