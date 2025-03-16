@@ -6,7 +6,7 @@ const ShopAllBanner: Field = {
   fields: [
     {
       name: "caption",
-      type: "text",
+      type: "textarea",
     },
   ],
 };

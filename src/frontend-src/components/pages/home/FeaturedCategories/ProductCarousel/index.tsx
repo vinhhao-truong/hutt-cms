@@ -10,21 +10,29 @@ import color from "@/frontend-src/libs/constants/color";
 import Link from "next/link";
 
 function NextArrow(props: any) {
-  const { className, style, onClick } = props;
+  const { className, style, onClick, disabled } = props;
   return (
     <motion.button
-      className="absolute bottom-[calc(100%+24px)] rounded-sm w-10 h-[26px] right-[208px] border-[1.5px] flex items-center justify-center"
+      className={`${disabled ? `bg-gray-100 text-gray-300 border-gray-300 cursor-default` : ``} absolute bottom-[calc(100%+24px)] rounded-sm w-10 h-[26px] right-[128px] border-[1.5px] flex items-center justify-center`}
       onClick={onClick}
-      initial={{
-        backgroundColor: "#FFFFFF",
-        color: color["system-blue-3"],
-        borderColor: color["system-blue-3"],
-      }}
-      whileHover={{
-        backgroundColor: color["system-blue-7"],
-        color: "#FFFFFF",
-        borderColor: color["system-blue-7"],
-      }}
+      initial={
+        !disabled
+          ? {
+              backgroundColor: "#FFFFFF",
+              color: color["system-blue-3"],
+              borderColor: color["system-blue-3"],
+            }
+          : {}
+      }
+      whileHover={
+        !disabled
+          ? {
+              backgroundColor: color["system-blue-7"],
+              color: "#FFFFFF",
+              borderColor: color["system-blue-7"],
+            }
+          : {}
+      }
     >
       {/* <Icon
         // style={{ color: props.color }}
@@ -37,21 +45,29 @@ function NextArrow(props: any) {
 }
 
 function PrevArrow(props: any) {
-  const { className, style, onClick } = props;
+  const { className, style, onClick, disabled } = props;
   return (
     <motion.button
-      className="absolute bottom-[calc(100%+24px)] rounded-sm w-10 h-[26px] right-[252px] border-[1.5px] flex items-center justify-center"
+      className={`${disabled ? `bg-gray-100 text-gray-300 border-gray-300 cursor-default` : ``} absolute bottom-[calc(100%+24px)] rounded-sm w-10 h-[26px] right-[172px] border-[1.5px] flex items-center justify-center`}
       onClick={onClick}
-      initial={{
-        backgroundColor: "#FFFFFF",
-        color: color["system-blue-3"],
-        borderColor: color["system-blue-3"],
-      }}
-      whileHover={{
-        backgroundColor: color["system-blue-7"],
-        color: "#FFFFFF",
-        borderColor: color["system-blue-7"],
-      }}
+      initial={
+        !disabled
+          ? {
+              backgroundColor: "#FFFFFF",
+              color: color["system-blue-3"],
+              borderColor: color["system-blue-3"],
+            }
+          : {}
+      }
+      whileHover={
+        !disabled
+          ? {
+              backgroundColor: color["system-blue-7"],
+              color: "#FFFFFF",
+              borderColor: color["system-blue-7"],
+            }
+          : {}
+      }
     >
       {/* <Icon
         // style={{ color: props.color }}
@@ -70,11 +86,11 @@ const RenderedCarousel = ({
   children: React.ReactNode;
   length: number;
 }) => {
-  if (length >= 4) {
+  if (length >= 5) {
     return (
       <Slider
         className={`relative w-full`}
-        slidesToShow={4}
+        slidesToShow={5}
         slidesToScroll={1}
         infinite
         // dots
@@ -92,12 +108,16 @@ const RenderedCarousel = ({
     );
   }
 
-  return <div className="relative grid w-full grid-cols-4">{children}</div>;
+  return (
+    <div className="relative grid w-full grid-cols-5">
+      <NextArrow disabled />
+      <PrevArrow disabled />
+      {children}
+    </div>
+  );
 };
 
 const ProductCarousel: React.FC<{ data: Product[] }> = ({ data }) => {
-  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
-
   if (data.length === 0) {
     return <></>;
   }
@@ -108,91 +128,83 @@ const ProductCarousel: React.FC<{ data: Product[] }> = ({ data }) => {
     <RenderedCarousel length={data.length}>
       {data.map((p, idx) => {
         const key = `featured-${p.id}-${idx}`;
-        const isHovered = hoveredIdx === idx;
-        const isLeft =
-          hoveredIdx && hoveredIdx > 0
-            ? hoveredIdx - 1 === idx
-            : hoveredIdx && hoveredIdx === 0 && idx === data.length - 1
-              ? true
-              : false;
+        const hasDiscount = idx % 2 === 0;
 
         return (
           <MotionLink
-            href={`/product/${p.id}`}
-            animate={
-              isHovered
-                ? {
-                    borderColor: color["system-blue-7"],
-                    borderRightColor: color["system-blue-7"],
-                  }
-                : {
-                    borderColor: color["system-blue-3"],
-                    borderRightColor: isLeft
-                      ? color["system-blue-7"]
-                      : color["system-blue-3"],
-                  }
-            }
-            className={`border-l-0 border-r border-y border-r-system-blue-3 border-y-system-blue-3 aspect-[29/30] p-7 relative z-0`}
+            href={`/product/detail/${p.id}`}
+            animate={{}}
+            className={`aspect-[29/30] px-4 lg:px-6 relative z-0 group`}
             key={key}
-            onMouseEnter={(e) => {
-              setTimeout(() => {
-                setHoveredIdx(idx);
-              }, 10);
-            }}
-            onMouseLeave={(e) => {
-              setTimeout(() => {
-                setHoveredIdx(null);
-              }, 10);
-            }}
           >
             {/* LEFT LINE */}
             {/* HEAD */}
-            <div className="mb-4 tracking-tight">
-              <h3 className="mb-2 text-xl font-semibold uppercase">
+            <div className="mb-2 tracking-tight">
+              <h3 className="mb-1 text-xl font-semibold uppercase group-hover:text-system-blue-7">
                 {p.productName}
               </h3>
-              <p className="text-xs">Lorem, ipsum dolor.</p>
-              <p className="text-xs">150ml</p>
+              <p className="text-xs group-hover:text-system-blue-7">
+                150ml / 15cm x 10cm
+              </p>
             </div>
             {/* THUMBNAIL */}
-            <Image
-              src="https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-m250pw14sy3fc4.webp"
-              alt={key}
-              width={600}
-              height={600}
-            />
-            {/* ADD TO CART BUTTON */}
-            <motion.button
-              className="flex justify-between items-center p-1.5 my-4 text-[10px] font-medium border w-full relative z-[1]"
-              initial={{
-                backgroundColor: "#FFFFFF",
-                color: color["system-blue-3"],
-                borderColor: color["system-blue-3"],
-              }}
-              animate={
-                isHovered
-                  ? {
-                      backgroundColor: color["system-blue-7"],
-                      color: "#FFFFFF",
-                      borderColor: color["system-blue-7"],
-                    }
-                  : {}
-              }
-              whileHover={{
-                backgroundColor: color["system-blue-8"],
-                color: "#FFFFFF",
-                borderColor: color["system-blue-8"],
-              }}
-              onClick={(e) => {
-                e.stopPropagation();
-                e.preventDefault();
-              }}
-            >
-              <p className="">+ THÊM VÀO GIỎ HÀNG</p>
-              <p className="">
+            <div className="relative">
+              <Image
+                src="https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-m250pw14sy3fc4.webp"
+                alt={key}
+                width={600}
+                height={600}
+                className="relative"
+              />
+              <motion.button
+                key={key}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                }}
+                className="absolute flex items-center justify-center bottom-4 right-4 rounded-full gap-1 group-1"
+                initial={{
+                  width: 32,
+                  height: 32,
+                  backgroundColor: color["system-blue-7"],
+                  color: "white",
+                }}
+                whileHover={{
+                  width: 150,
+                  backgroundColor: color["system-blue-6"],
+                }}
+              >
+                <Icon icon="ion:bag-add" />
+                <p className="hidden group-1-hover:block text-[10px] font-medium truncate">
+                  THÊM VÀO GIỎ HÀNG
+                </p>
+              </motion.button>
+            </div>
+            {hasDiscount && (
+              <div className="flex gap-1 items-end my-2">
+                <p className="text-red-500 text-2xl 2xl:text-4xl">
+                  50.000<sup>đ</sup>
+                </p>
+                <p className="line-through text-gray-400 text-sm 2xl:text-base">
+                  {/* {new Intl.NumberFormat("vi-VN", {
+                  style: "currency",
+                  currency: "VND",
+                }).format(50000)} */}
+                  20.000<sup>đ</sup>
+                </p>
+              </div>
+            )}
+            {!hasDiscount && (
+              <p className="text-system-blue-7 my-2 text-2xl 2xl:text-4xl">
                 20.000<sup>đ</sup>
               </p>
-            </motion.button>
+            )}
+            <p className="text-xs group-hover:text-system-blue-7">
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi,
+              iure in laboriosam vitae magni repellendus dolore? Facilis illum
+              ullam repellendus possimus ab nisi eius nihil vero laborum
+              incidunt, nam officiis!
+            </p>
           </MotionLink>
         );
       })}

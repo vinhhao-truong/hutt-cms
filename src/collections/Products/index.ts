@@ -84,6 +84,16 @@ const IsActive: Field = {
   },
 };
 
+const ShortDescription: Field = {
+  name: "shortDescription",
+  type: "textarea",
+  required: true,
+  label: {
+    en: "Short Description",
+    vi: "Mô Tả Ngắn",
+  },
+};
+
 const Description: Field = {
   name: "description",
   type: "richText",
@@ -123,6 +133,7 @@ const Products: CollectionConfig = {
       type: "row",
       fields: [Brand, Category],
     },
+    ShortDescription,
     Description,
     Specifications,
     EnableVariations,

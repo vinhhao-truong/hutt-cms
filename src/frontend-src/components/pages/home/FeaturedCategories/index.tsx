@@ -5,15 +5,18 @@ import Link from "next/link";
 import React from "react";
 import ProductCarousel from "./ProductCarousel";
 import { motion } from "framer-motion";
-import color from "@/frontend-src/libs/constants/color";
+import color, { colorRgba } from "@/frontend-src/libs/constants/color";
+import FadeIn from "@/frontend-src/components/animated/FadeIn";
 
 const FeaturedCategories: React.FC<{
   data: HomePageDataTypes["featuredCategories"];
 }> = ({ data }) => {
   const MotionLink = motion.create(Link);
 
+  console.log("fe", data);
+
   return (
-    <ul className="flex flex-col gap-12">
+    <ul className="flex flex-col gap-24">
       {data?.categories &&
         Object.keys(data.categories).map((category, idx) => {
           const key = `featured-products-${idx}`;
@@ -28,29 +31,35 @@ const FeaturedCategories: React.FC<{
 
           return (
             <li className="" key={key}>
-              <div className="flex items-end justify-between px-6 mb-6">
-                <h2 className="text-5xl font-semibold tracking-tight uppercase">
-                  {category}
-                </h2>
-                <MotionLink
-                  href={`/brand/${slug}`}
-                  className="h-[26px] w-[180px] flex items-center justify-center text-xs border-[1.5px] rounded-sm"
-                  initial={{
-                    backgroundColor: color["system-blue-1"],
-                    color: color["system-blue-4"],
-                    borderColor: color["system-blue-4"],
-                  }}
-                  whileHover={{
-                    backgroundColor: color["system-blue-7"],
-                    color: "#FFFFFF",
-                    borderColor: color["system-blue-7"],
-                  }}
-                >
-                  SHOP THƯƠNG HIỆU NÀY
-                </MotionLink>
-              </div>
-              {/* <Link href={`/${slug}`}>test</Link> */}
-              <ProductCarousel data={prods ?? []} />
+              <FadeIn>
+                <div className="relative flex items-end justify-between ml-36 pr-6 mb-6">
+                  <div className="absolute left-6 -bottom-3 h-1 w-12 bg-system-blue-8"></div>
+                  <h2 className="text-5xl font-semibold tracking-tight uppercase">
+                    {category}{" "}
+                    <sup className="text-base -translate-y-24">
+                      [{prods?.length}]
+                    </sup>
+                  </h2>
+                  <MotionLink
+                    href={`/category/${slug}`}
+                    className="h-[26px] w-[100px] flex items-center justify-center text-xs border-[1.5px] rounded-sm"
+                    initial={{
+                      backgroundColor: colorRgba("system-blue-1", 0.4),
+                      color: color["system-blue-3"],
+                      borderColor: color["system-blue-3"],
+                    }}
+                    whileHover={{
+                      backgroundColor: colorRgba("system-blue-7", 1),
+                      color: "#FFFFFF",
+                      borderColor: color["system-blue-7"],
+                    }}
+                  >
+                    XEM TẤT CẢ
+                  </MotionLink>
+                </div>
+                {/* <Link href={`/${slug}`}>test</Link> */}
+                <ProductCarousel data={prods ?? []} />
+              </FadeIn>
             </li>
           );
         })}

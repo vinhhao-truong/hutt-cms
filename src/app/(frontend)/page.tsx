@@ -6,6 +6,7 @@ import { HomePage as HomePageTypes, Product } from "@/payload-types";
 import FeaturedCategories from "@/frontend-src/components/pages/home/FeaturedCategories";
 import Introduction from "@/frontend-src/components/pages/home/Introduction";
 import AllCategories from "@/frontend-src/components/pages/home/AllCategories";
+import ShopAllBanner from "@/frontend-src/components/pages/home/ShopAllBanner";
 
 export interface HomePageDataTypes
   extends Omit<HomePageTypes, "featuredCategories"> {
@@ -37,6 +38,7 @@ const HomePage = async () => {
       <FeaturedCategories
         data={(homePageData as HomePageDataTypes).featuredCategories}
       />
+      <ShopAllBanner data={homePageData.shopAllBanner} />
       <AllCategories data={(homePageData as HomePageDataTypes).allCategories} />
     </div>
   );

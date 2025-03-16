@@ -178,6 +178,7 @@ export interface Product {
   productCode?: string | null;
   brand?: (number | null) | Brand;
   category?: (number | Subcategory)[] | null;
+  shortDescription: string;
   description: {
     root: {
       type: string;
@@ -392,6 +393,7 @@ export interface ProductsSelect<T extends boolean = true> {
   productCode?: T;
   brand?: T;
   category?: T;
+  shortDescription?: T;
   description?: T;
   specifications?:
     | T

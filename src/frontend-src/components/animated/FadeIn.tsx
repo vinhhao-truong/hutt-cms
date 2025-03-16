@@ -5,7 +5,11 @@ import { motion } from "framer-motion";
 
 const FadeIn: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}>
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 0.4 }}
+    >
       {children}
     </motion.div>
   );
