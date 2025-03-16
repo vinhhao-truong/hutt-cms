@@ -2073,12 +2073,12 @@
   resolved "https://registry.npmjs.org/@nolyfill/is-core-module/-/is-core-module-1.0.39.tgz"
   integrity sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA==
 
-"@payloadcms/db-postgres@latest":
-  version "3.23.0"
-  resolved "https://registry.npmjs.org/@payloadcms/db-postgres/-/db-postgres-3.23.0.tgz"
-  integrity sha512-PjqSh+mr1qP9+vavm1aZqPRp+pJtW69OefbUrE9O/DjPe50Lrg8h9QmnP5OT/aGFBHzI+41u6BRsGc3tazxqVA==
+"@payloadcms/db-postgres@^3.25.0":
+  version "3.28.1"
+  resolved "https://registry.yarnpkg.com/@payloadcms/db-postgres/-/db-postgres-3.28.1.tgz#8b386695939f4c739ac2b69ae019f34d36e3d893"
+  integrity sha512-HSGJJtADPsOmEC3A8QiGto/if7u03SqjVZMYUFY/OAhc6y4PabOoVcB/B+pbsqxNAD5Rob7zgYHsqcUzydfWYg==
   dependencies:
-    "@payloadcms/drizzle" "3.23.0"
+    "@payloadcms/drizzle" "3.28.1"
     "@types/pg" "8.10.2"
     console-table-printer "2.12.1"
     drizzle-kit "0.28.0"
@@ -2088,10 +2088,10 @@
     to-snake-case "1.0.0"
     uuid "10.0.0"
 
-"@payloadcms/drizzle@3.23.0":
-  version "3.23.0"
-  resolved "https://registry.npmjs.org/@payloadcms/drizzle/-/drizzle-3.23.0.tgz"
-  integrity sha512-RvDQ4GQbfJx+vboX/ULOzHMag3S1MgFVmIH4R6g4fxj+9h6+SzibZRj5JKk7aVjoekM/QsRB9ixFTI3XY9onuA==
+"@payloadcms/drizzle@3.28.1":
+  version "3.28.1"
+  resolved "https://registry.yarnpkg.com/@payloadcms/drizzle/-/drizzle-3.28.1.tgz#ef17c18fd1818d142745db37c7710abd0d2a8306"
+  integrity sha512-T+nSC+MFMYZIGT9grArTBQQtQmoqdCtPe5Rv/q19zJozUCVcDOgMd8IZfmh7mu0yBuoNf5mqCAy1zi5FbmsuHw==
   dependencies:
     console-table-printer "2.12.1"
     drizzle-orm "0.36.1"
@@ -2099,10 +2099,10 @@
     to-snake-case "1.0.0"
     uuid "9.0.0"
 
-"@payloadcms/email-nodemailer@3.23.0":
-  version "3.23.0"
-  resolved "https://registry.npmjs.org/@payloadcms/email-nodemailer/-/email-nodemailer-3.23.0.tgz"
-  integrity sha512-Zr2iF0Zwl9+dc/1TmLJOir/XYYGFYthe18wVtW6ogzb2giw6JTJJD+DuPTJySDFy3nZLnFha16H6M9CwbHfj2g==
+"@payloadcms/email-nodemailer@3.28.1":
+  version "3.28.1"
+  resolved "https://registry.yarnpkg.com/@payloadcms/email-nodemailer/-/email-nodemailer-3.28.1.tgz#a6b422a05d5ab3a227cf92e70bdf91f9166591cf"
+  integrity sha512-JMTQALZS5Z6JP0wyPtnXUU8lCkJZFoF0K++hMS1PvoTDO/oxA7fucL+owAJdF/bWkPS6jTvT/pIhpJC7VLlwlQ==
   dependencies:
     nodemailer "6.9.16"
 
@@ -2137,16 +2137,16 @@
     sass "1.77.4"
     uuid "10.0.0"
 
-"@payloadcms/payload-cloud@latest":
-  version "3.23.0"
-  resolved "https://registry.npmjs.org/@payloadcms/payload-cloud/-/payload-cloud-3.23.0.tgz"
-  integrity sha512-mmIp6a+l5MIRZTzRSlsd4mQIIx2FBw9x609HXSraHB4vxe5gIQOgTFTTz+eEagcCXnwrIkdkjxG0NE1qI4SXgA==
+"@payloadcms/payload-cloud@^3.25.0":
+  version "3.28.1"
+  resolved "https://registry.yarnpkg.com/@payloadcms/payload-cloud/-/payload-cloud-3.28.1.tgz#1d750e23216ac0a98975dad6df54dfdf761413ab"
+  integrity sha512-XpKVZs9JdZuzwpA374yNU1AU7SRuoZN0yWhQW0OmzgveUnne0kzKmfSay8TXntewKv+4M8ij162udFpe67hfZw==
   dependencies:
     "@aws-sdk/client-cognito-identity" "^3.614.0"
     "@aws-sdk/client-s3" "^3.614.0"
     "@aws-sdk/credential-providers" "^3.614.0"
     "@aws-sdk/lib-storage" "^3.614.0"
-    "@payloadcms/email-nodemailer" "3.23.0"
+    "@payloadcms/email-nodemailer" "3.28.1"
     amazon-cognito-identity-js "^6.1.2"
     nodemailer "6.9.16"
 
@@ -2204,6 +2204,13 @@
   version "3.25.0"
   resolved "https://registry.yarnpkg.com/@payloadcms/translations/-/translations-3.25.0.tgz#f2dfee446c19f2b42e483de6e05eb7731e5c3d24"
   integrity sha512-af+fDh+fzfExx9oeM8AJqwdEfc6X291smMUUe3mOCRlwIylcxXKzgj8ITdwPonGzaV/GJjAsc4U0mZIkaA6MMg==
+  dependencies:
+    date-fns "4.1.0"
+
+"@payloadcms/translations@3.28.1":
+  version "3.28.1"
+  resolved "https://registry.yarnpkg.com/@payloadcms/translations/-/translations-3.28.1.tgz#3d77ff5797d802127b1072ffb567a16ce6122a22"
+  integrity sha512-TC3CvyXl5wdvtkcTmSNUe5F2rjYPMtLIc3l27JEpuuKvqUE8B5rSt99cov3I3yaQwvsLZDW+8098rrmAqjFyUQ==
   dependencies:
     date-fns "4.1.0"
 
@@ -6200,13 +6207,13 @@ path-type@^4.0.0:
   resolved "https://registry.npmjs.org/path-type/-/path-type-4.0.0.tgz"
   integrity sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==
 
-payload@^3.25.0:
-  version "3.25.0"
-  resolved "https://registry.yarnpkg.com/payload/-/payload-3.25.0.tgz#e2732a5187a1cbd2806fa73a542e7cbe40056726"
-  integrity sha512-azT1qtirV8QqIPpyWaxbF5TJPoWT5fpYoxin83wZxF5gmg0O06bL5YKCGFfCpzgCcw4FrFtLSzD68zGMc5m5Eg==
+payload@^3.28.1:
+  version "3.28.1"
+  resolved "https://registry.yarnpkg.com/payload/-/payload-3.28.1.tgz#7c5d6fca54a157345eadf453a4704112109fd94a"
+  integrity sha512-wTR/QfImkOuVkSbudRKQjBj7hS5ZUH2b+nk/ZmShCz8jXGg5YyDumg0QtRHXDi0PrYONMhSihYdhWhHEkNXRAw==
   dependencies:
     "@next/env" "^15.1.5"
-    "@payloadcms/translations" "3.25.0"
+    "@payloadcms/translations" "3.28.1"
     "@types/busboy" "1.5.4"
     ajv "8.17.1"
     bson-objectid "2.0.4"

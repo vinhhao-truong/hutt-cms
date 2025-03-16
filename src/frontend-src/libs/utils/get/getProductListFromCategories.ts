@@ -8,7 +8,8 @@ const getProductListFromCategories = async (
     slug?: string | null | undefined;
     subcategoryList?: (number | Subcategory)[] | null | undefined;
   }>,
-  payload: BasePayload
+  payload: BasePayload,
+  includesOther: boolean = false
 ) => {
   const allIds = [];
   const result: any = {};
@@ -29,16 +30,25 @@ const getProductListFromCategories = async (
 
   const uniqueIds: string[] = Array.from(new Set(allIds));
 
-  const products = await payload.find({
-    collection: "products",
-    where: {
-      or: uniqueIds.map((i) => ({ id: { equals: i } })),
-    },
-    select: {
-      id: true,
-      productName: true,
-    },
-  });
+  const orWhereClause = [...uniqueIds.map((i) => ({ id: { equals: i } }))];
+
+  if (includesOther) {
+    // @ts-ignore
+    orWhereClause.push({ category: { equals: null } });
+  }
+
+  const [products] = await Promise.all([
+    payload.find({
+      collection: "products",
+      where: {
+        or: orWhereClause,
+      },
+      select: {
+        id: true,
+        productName: true,
+      },
+    }),
+  ]);
 
   const prodsObj = {};
   for (let i = 0; i < products.docs.length; i++) {
@@ -48,13 +58,26 @@ const getProductListFromCategories = async (
 
   for (let i = 0; i < Object.keys(result).length; i++) {
     const val = result[Object.keys(result)[i]];
-    // @ts-ignore
-    const prods = val.map((p: string) => prodsObj[p]);
+    const prods = val?.map((p: string) => {
+      // @ts-ignore
+      const prod = prodsObj?.[p];
+      // @ts-ignore
+      delete prodsObj?.[p];
+      return prod;
+    });
     result[Object.keys(result)[i]] = {
       slug: categories.docs[i]?.slug,
       products: prods,
     };
   }
+
+  if (includesOther) {
+    result["Khác"] = {
+      slug: "khac",
+      products: Object.values(prodsObj),
+    };
+  }
+
   return result;
 };
 

@@ -520,6 +520,7 @@ export interface HomePage {
   };
   shopAllBanner?: {
     caption?: string | null;
+    justt?: string | null;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -544,6 +545,7 @@ export interface HomePageSelect<T extends boolean = true> {
     | T
     | {
         caption?: T;
+        justt?: T;
       };
   updatedAt?: T;
   createdAt?: T;

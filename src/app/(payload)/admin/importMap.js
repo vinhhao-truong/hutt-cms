@@ -20,8 +20,8 @@ import { StrikethroughFeatureClient as StrikethroughFeatureClient_e70f5e05f09f93
 import { UnderlineFeatureClient as UnderlineFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { BoldFeatureClient as BoldFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { ItalicFeatureClient as ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
-import { default as default_0f37848461a628da72cfec171fd94a5d } from 'src/custom-fields/CustomVNDField'
-import { default as default_86ac6c42d810a73d06054f384cb4d18b } from 'src/custom-fields/LabelledArrayRow'
+import { default as default_0f37848461a628da72cfec171fd94a5d } from '../../../custom-fields/CustomVNDField'
+import { default as default_86ac6c42d810a73d06054f384cb4d18b } from '../../../custom-fields/LabelledArrayRow'
 import { S3ClientUploadHandler as S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24 } from '@payloadcms/storage-s3/client'
 
 export const importMap = {

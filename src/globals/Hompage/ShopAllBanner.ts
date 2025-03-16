@@ -8,6 +8,10 @@ const ShopAllBanner: Field = {
       name: "caption",
       type: "textarea",
     },
+    {
+      name: "justt",
+      type: "text",
+    },
   ],
 };
 

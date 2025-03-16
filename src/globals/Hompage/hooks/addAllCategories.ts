@@ -12,7 +12,9 @@ const addAllCategories: AfterReadHook = async ({ doc, req: { payload } }) => {
     },
   });
 
-  doc.allCategories = await getProductListFromCategories(categories, payload);
+  doc.allCategories = {
+    categories: await getProductListFromCategories(categories, payload, true),
+  };
 
   return doc;
 };

@@ -19,7 +19,7 @@ export interface HomePageDataTypes
   allCategories?: {
     // categories?: (number | Category)[] | null;
     categories?: {
-      [key: string]: Product[];
+      [key: string]: { slug?: string; products?: Product[] };
     };
   };
 }
@@ -32,7 +32,7 @@ const HomePage = async () => {
   });
 
   return (
-    <div className="flex flex-col gap-10">
+    <div className="flex flex-col">
       <HomeHeroBanner data={homePageData.shopAllBanner} />
       <Introduction data={homePageData["introduction"]} />
       <FeaturedCategories

@@ -17,7 +17,7 @@ const Introduction: React.FC<{
     ));
 
   return (
-    <PageContainer className="flex justify-center gap-10 px-28">
+    <PageContainer className="flex justify-center gap-10 px-28 my-12">
       <h2 className="text-3xl font-medium">{data?.shortIntro}</h2>
       <p className="text-sm">{formattedOurMission}</p>
     </PageContainer>

@@ -16,7 +16,7 @@ const FeaturedCategories: React.FC<{
   console.log("fe", data);
 
   return (
-    <ul className="flex flex-col gap-24">
+    <ul className="flex flex-col gap-24 my-12">
       {data?.categories &&
         Object.keys(data.categories).map((category, idx) => {
           const key = `featured-products-${idx}`;
@@ -32,7 +32,7 @@ const FeaturedCategories: React.FC<{
           return (
             <li className="" key={key}>
               <FadeIn>
-                <div className="relative flex items-end justify-between ml-36 pr-6 mb-6">
+                <div className="relative flex items-end justify-between ml-36 pr-6 my-6">
                   <div className="absolute left-6 -bottom-3 h-1 w-12 bg-system-blue-8"></div>
                   <h2 className="text-5xl font-semibold tracking-tight uppercase">
                     {category}{" "}

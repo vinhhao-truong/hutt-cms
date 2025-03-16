@@ -56,9 +56,9 @@ const Navigation = () => {
         className="w-full fixed top-0 z-[5] text-sm"
       >
         <motion.div
-          initial={{ backgroundColor: colorRgba("system-green-1", 0) }}
+          // initial={{ backgroundColor: colorRgba("system-green-1", 0) }}
           whileHover={{
-            backgroundColor: colorRgba("system-green-1", 0.1),
+            // backgroundColor: colorRgba("system-green-1", 0.1),
             color: color["system-blue-8"],
           }}
           className="w-full"
@@ -94,7 +94,17 @@ const Navigation = () => {
               >
                 <motion.div
                   initial={{ width: 55 }}
-                  animate={!isLogoBig ? { width: 92 } : { width: 250 }}
+                  animate={
+                    !isLogoBig
+                      ? {
+                          width: 92,
+                          backgroundColor: "rgba(255, 255, 255, 0.6)",
+                        }
+                      : {
+                          width: 250,
+                          backgroundColor: "rgba(255, 255, 255, 0)",
+                        }
+                  }
                   className="h-[50px]"
                 >
                   <HuttLogo />

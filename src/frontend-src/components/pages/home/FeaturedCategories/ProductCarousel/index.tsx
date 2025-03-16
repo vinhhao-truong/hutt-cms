@@ -86,11 +86,11 @@ const RenderedCarousel = ({
   children: React.ReactNode;
   length: number;
 }) => {
-  if (length >= 5) {
+  if (length >= 4) {
     return (
       <Slider
         className={`relative w-full`}
-        slidesToShow={5}
+        slidesToShow={4}
         slidesToScroll={1}
         infinite
         // dots
@@ -109,7 +109,7 @@ const RenderedCarousel = ({
   }
 
   return (
-    <div className="relative grid w-full grid-cols-5">
+    <div className="relative grid w-full grid-cols-4">
       <NextArrow disabled />
       <PrevArrow disabled />
       {children}

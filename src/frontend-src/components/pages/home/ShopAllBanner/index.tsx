@@ -12,7 +12,7 @@ const ShopAllBanner: React.FC<{
   data: HomePageDataTypes["shopAllBanner"];
 }> = ({ data }) => {
   return (
-    <Link href={`/product/new`} className="relative w-full h-screen my-6">
+    <Link href={`/product/new`} className="relative w-full h-screen mt-6">
       <Image
         className="object-cover"
         alt="shop-all-banner"
