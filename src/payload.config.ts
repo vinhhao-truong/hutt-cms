@@ -16,6 +16,7 @@ import Products from "./collections/Products";
 import Brands from "./collections/Brands";
 import Subcategories from "./collections/Subcategories";
 import HomePage from "./globals/Hompage";
+import Footer from "./globals/Footer";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -29,7 +30,7 @@ export default buildConfig({
     },
   },
   // collections: [Users, Media, Brands, Categories, Subcategories],
-  globals: [HomePage],
+  globals: [Footer, HomePage],
   collections: [Users, Media, Products, Brands, Categories, Subcategories],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",

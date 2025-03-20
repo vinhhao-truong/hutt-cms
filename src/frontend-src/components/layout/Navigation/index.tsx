@@ -6,7 +6,12 @@ import Link from "next/link";
 import Modal from "../../common/Modal";
 import FadeIn from "../../animated/FadeIn";
 import { Icon } from "@iconify/react";
-import { motion, useMotionValueEvent, useScroll } from "framer-motion";
+import {
+  motion,
+  useMotionValueEvent,
+  useScroll,
+  useVelocity,
+} from "framer-motion";
 import color, { colorRgba } from "@/frontend-src/libs/constants/color";
 import HuttLogo from "@/assets/images/logo";
 
@@ -28,11 +33,13 @@ const navData = [
 const Navigation = () => {
   const [isNavOpen, setIsNavOpen] = useState<boolean>(false);
   const [currentScreenHeight, setCurrentScreenHeight] = useState<number>(0);
+  const [currentVelocity, setCurrentVelocity] = useState<number>(1);
 
   const isLogoOnTop = false;
   const { scrollY } = useScroll();
+  const velocity = useVelocity(scrollY);
 
-  const isLogoBig = useMemo(() => {
+  const isOnTopBanner = useMemo(() => {
     if (typeof window !== "undefined") {
       const SCREEN_HEIGHT = window.innerHeight;
       return SCREEN_HEIGHT * 0.65 - currentScreenHeight >= 0;
@@ -40,9 +47,19 @@ const Navigation = () => {
     return true;
   }, [currentScreenHeight]);
 
+  const isDown = useMemo(() => {
+    return currentVelocity > 0;
+  }, [currentVelocity]);
+
   useMotionValueEvent(scrollY, "change", (val) => {
     if (!isLogoOnTop) {
       setCurrentScreenHeight(val);
+    }
+  });
+
+  useMotionValueEvent(velocity, "change", (val) => {
+    if (val !== 0) {
+      setCurrentVelocity(val);
     }
   });
 
@@ -53,17 +70,28 @@ const Navigation = () => {
         whileHover={{
           backgroundColor: "rgba(255, 255, 255, 1)",
         }}
-        className="w-full fixed top-0 z-[5] text-sm"
+        animate={
+          isDown && !isOnTopBanner
+            ? { y: -65 }
+            : {
+                y: 0,
+                backgroundColor: isOnTopBanner
+                  ? "rgba(255, 255, 255, 0)"
+                  : "rgba(255, 255, 255, 1)",
+              }
+        }
+        transition={{ duration: 0.2 }}
+        className="w-full fixed top-0 z-[5] text-sm h-[65px]"
       >
         <motion.div
           // initial={{ backgroundColor: colorRgba("system-green-1", 0) }}
           whileHover={{
             // backgroundColor: colorRgba("system-green-1", 0.1),
-            color: color["system-blue-8"],
+            color: "#000000",
           }}
-          className="w-full"
+          className="w-full h-full"
         >
-          <div className="relative flex items-center justify-between p-6 font-medium">
+          <div className="relative flex items-center justify-between w-full h-full p-6 font-medium">
             {/* LEFT NAV */}
             <nav className="flex items-center list-none gap-x-6">
               <li className="" onClick={() => setIsNavOpen(true)}>
@@ -77,40 +105,14 @@ const Navigation = () => {
                 );
               })}
             </nav>
-            {/* LOGO */}
-            {isLogoOnTop ? (
-              <Link
-                href={`/`}
-                className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-              >
-                <div className="w-[55px] h-[50px]">
-                  <HuttLogo />
-                </div>
-              </Link>
-            ) : (
-              <Link
-                href={`/`}
-                className="absolute top-[calc(100%+3rem)] left-6"
-              >
-                <motion.div
-                  initial={{ width: 55 }}
-                  animate={
-                    !isLogoBig
-                      ? {
-                          width: 92,
-                          backgroundColor: "rgba(255, 255, 255, 0.6)",
-                        }
-                      : {
-                          width: 250,
-                          backgroundColor: "rgba(255, 255, 255, 0)",
-                        }
-                  }
-                  className="h-[50px]"
-                >
-                  <HuttLogo />
-                </motion.div>
-              </Link>
-            )}
+            <Link
+              href={`/`}
+              className="absolute -translate-x-1/2 -translate-y-2/3 top-1/2 left-1/2"
+            >
+              <div className="w-[55px] h-[50px]">
+                <HuttLogo />
+              </div>
+            </Link>
             {/* RIGHT NAV */}
             <nav className="flex items-center list-none gap-x-6">
               <li className="flex items-center gap-1">

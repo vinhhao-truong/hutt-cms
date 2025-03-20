@@ -7,13 +7,13 @@ import ProductCarousel from "./ProductCarousel";
 import { motion } from "framer-motion";
 import color, { colorRgba } from "@/frontend-src/libs/constants/color";
 import FadeIn from "@/frontend-src/components/animated/FadeIn";
+import { v4 } from "uuid";
+import HuttLogo from "@/assets/images/logo";
 
 const FeaturedCategories: React.FC<{
   data: HomePageDataTypes["featuredCategories"];
 }> = ({ data }) => {
   const MotionLink = motion.create(Link);
-
-  console.log("fe", data);
 
   return (
     <ul className="flex flex-col gap-24 my-12">
@@ -32,14 +32,20 @@ const FeaturedCategories: React.FC<{
           return (
             <li className="" key={key}>
               <FadeIn>
-                <div className="relative flex items-end justify-between ml-36 pr-6 my-6">
-                  <div className="absolute left-6 -bottom-3 h-1 w-12 bg-system-blue-8"></div>
-                  <h2 className="text-5xl font-semibold tracking-tight uppercase">
-                    {category}{" "}
-                    <sup className="text-base -translate-y-24">
-                      [{prods?.length}]
-                    </sup>
-                  </h2>
+                <div className="relative flex items-end justify-between mx-6 my-6">
+                  <div className="absolute w-12 h-1 bg-black left-6 -bottom-3"></div>
+                  <div className="flex items-center">
+                    <h2 className="mr-4 text-5xl font-semibold tracking-tight uppercase">
+                      {category}{" "}
+                      <sup className="text-base -translate-y-24">
+                        [{prods?.length}]
+                      </sup>
+                    </h2>
+                    {/* <div className="w-[90px] -translate-y-[6px]">
+                      <HuttLogo />
+                    </div> */}
+                  </div>
+
                   <MotionLink
                     href={`/category/${slug}`}
                     className="h-[26px] w-[100px] flex items-center justify-center text-xs border-[1.5px] rounded-sm"
@@ -58,7 +64,7 @@ const FeaturedCategories: React.FC<{
                   </MotionLink>
                 </div>
                 {/* <Link href={`/${slug}`}>test</Link> */}
-                <ProductCarousel data={prods ?? []} />
+                <ProductCarousel data={prods ?? []} key={v4()} />
               </FadeIn>
             </li>
           );

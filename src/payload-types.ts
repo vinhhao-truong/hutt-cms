@@ -100,9 +100,11 @@ export interface Config {
     defaultIDType: number;
   };
   globals: {
+    footer: Footer;
     homePage: HomePage;
   };
   globalsSelect: {
+    footer: FooterSelect<false> | FooterSelect<true>;
     homePage: HomePageSelect<false> | HomePageSelect<true>;
   };
   locale: null;
@@ -507,6 +509,30 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer".
+ */
+export interface Footer {
+  id: number;
+  mediaUrls?:
+    | {
+        mediaLabel?: string | null;
+        mediaUrl?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  infoInternalUrls?:
+    | {
+        infoLabel?: string | null;
+        infoUrl?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  generalDescription?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "homePage".
  */
 export interface HomePage {
@@ -524,6 +550,30 @@ export interface HomePage {
   };
   updatedAt?: string | null;
   createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer_select".
+ */
+export interface FooterSelect<T extends boolean = true> {
+  mediaUrls?:
+    | T
+    | {
+        mediaLabel?: T;
+        mediaUrl?: T;
+        id?: T;
+      };
+  infoInternalUrls?:
+    | T
+    | {
+        infoLabel?: T;
+        infoUrl?: T;
+        id?: T;
+      };
+  generalDescription?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

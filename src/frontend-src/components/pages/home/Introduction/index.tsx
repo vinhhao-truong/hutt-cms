@@ -7,19 +7,10 @@ import React from "react";
 const Introduction: React.FC<{
   data: HomePageDataTypes["introduction"];
 }> = ({ data }) => {
-  const formattedOurMission = data?.ourMission
-    ?.split("\n")
-    .map((line: string, index: number) => (
-      <span key={index}>
-        {line}
-        <br />
-      </span>
-    ));
-
   return (
-    <PageContainer className="flex justify-center gap-10 px-28 my-12">
+    <PageContainer className="flex justify-center gap-10 my-12 px-28">
       <h2 className="text-3xl font-medium">{data?.shortIntro}</h2>
-      <p className="text-sm">{formattedOurMission}</p>
+      <p className="text-sm whitespace-pre-line">{data?.ourMission}</p>
     </PageContainer>
   );
 };

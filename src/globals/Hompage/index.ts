@@ -13,8 +13,8 @@ const HomePage: GlobalConfig = {
     },
   },
   label: {
-    en: "Homepage Management",
-    vi: "Quản Lý Trang Chủ",
+    en: "Homepage",
+    vi: "Trang Chủ",
   },
   fields: [Introduction, FeaturedCategories, ShopAllBanner],
   hooks: {
