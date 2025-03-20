@@ -541,12 +541,11 @@ export interface HomePage {
     shortIntro?: string | null;
     ourMission?: string | null;
   };
-  featuredCategories?: {
+  editorFeaturedCategories?: {
     categories?: (number | Category)[] | null;
   };
   shopAllBanner?: {
     caption?: string | null;
-    justt?: string | null;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -586,7 +585,7 @@ export interface HomePageSelect<T extends boolean = true> {
         shortIntro?: T;
         ourMission?: T;
       };
-  featuredCategories?:
+  editorFeaturedCategories?:
     | T
     | {
         categories?: T;
@@ -595,7 +594,6 @@ export interface HomePageSelect<T extends boolean = true> {
     | T
     | {
         caption?: T;
-        justt?: T;
       };
   updatedAt?: T;
   createdAt?: T;

@@ -1,8 +1,9 @@
 import { GlobalConfig } from "payload";
 import Introduction from "./Introduction";
-import FeaturedCategories from "./FeaturedCategories";
+import EditorFeaturedCategories from "./FeaturedCategories";
 import ShopAllBanner from "./ShopAllBanner";
 import addAllCategories from "./hooks/addAllCategories";
+import addFeaturedCategories from "./hooks/addFeaturedCategories";
 
 const HomePage: GlobalConfig = {
   slug: "homePage",
@@ -16,9 +17,9 @@ const HomePage: GlobalConfig = {
     en: "Homepage",
     vi: "Trang Chủ",
   },
-  fields: [Introduction, FeaturedCategories, ShopAllBanner],
+  fields: [Introduction, EditorFeaturedCategories, ShopAllBanner],
   hooks: {
-    afterRead: [addAllCategories],
+    afterRead: [addAllCategories, addFeaturedCategories],
   },
   access: {
     read: () => {
