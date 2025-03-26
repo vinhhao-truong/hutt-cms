@@ -135,7 +135,7 @@ const ProductCarousel: React.FC<{ data: Product[] }> = ({ data }) => {
         return (
           <div className="px-0.5" key={key}>
             <MotionLink
-              href={`/product/detail/${p.id}`}
+              href={`/shop/detail/${p.id}`}
               initial={{ borderColor: tailwindData.colors.gray[300] }}
               whileHover={{ borderColor: color["system-blue-7"] }}
               className={`aspect-[29/30] px-4 lg:p-6 relative z-0 group border block`}

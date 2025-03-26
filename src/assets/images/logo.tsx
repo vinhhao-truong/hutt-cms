@@ -1,12 +1,22 @@
 import { motion } from "framer-motion";
 import React from "react";
 
-const HuttLogo = ({ colored = true }) => {
+const HuttLogo = ({
+  colored = true,
+  width,
+  height,
+}: {
+  colored?: boolean;
+  width?: string;
+  height?: string;
+}) => {
   return (
     <div className="flex items-center w-full h-full">
       <svg
         // width="1133"
         // height="591"
+        width={width}
+        height={height}
         viewBox="0 0 1133 591"
         // viewBox="0 0 100 100"
         preserveAspectRatio="xMidYMid meet"

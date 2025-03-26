@@ -96,7 +96,7 @@ const AllCategories: React.FC<{
                   <FadeIn>
                     <MotionLink
                       className="relative block w-full h-full px-2 py-4 bg-white border rounded-sm"
-                      href={`/product/detail/${p.id}`}
+                      href={`/shop/detail/${p.id}`}
                       onMouseEnter={() => setHoveredItemId(p.id)}
                       onMouseLeave={() => setHoveredItemId(null)}
                       animate={

@@ -4,6 +4,7 @@ import HuttLogo from "@/assets/images/logo";
 import { getPayload } from "payload";
 import config from "@/payload.config";
 import Link from "next/link";
+import scrollToTop from "@/frontend-src/libs/utils/ui/scrollToTop";
 
 interface RenderedUrl {
   label: string | null | undefined;
@@ -53,7 +54,12 @@ const Footer = async () => {
     <footer className="grid grid-cols-10 border-t border-gray-400">
       {/* LEFT */}
       <div className="flex flex-col items-center justify-between col-span-4 py-6 border-r border-r-gray-400">
-        <Link href={"/"} className="w-[100px] h-[50px]">
+        <Link
+          href={"/"}
+          className="w-[100px] h-[50px]"
+          onClick={scrollToTop}
+          scroll={false}
+        >
           <HuttLogo />
         </Link>
         <ul className="flex flex-col items-center gap-4 text-sm font-medium">
