@@ -11,12 +11,15 @@ import sharp from "sharp";
 import { s3Storage } from "@payloadcms/storage-s3";
 import Categories from "./collections/Categories";
 import { Users } from "./collections/Users";
-import { Media } from "./collections/Media";
+import Images from "./media-collections/Images";
 import Products from "./collections/Products";
 import Brands from "./collections/Brands";
 import Subcategories from "./collections/Subcategories";
 import HomePage from "./globals/Hompage";
 import Footer from "./globals/Footer";
+import Videos from "./media-collections/Videos";
+import Spreadsheets from "./media-collections/Spreadsheets";
+import UpdateProductList from "./globals/UpdateProductList";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -30,8 +33,17 @@ export default buildConfig({
     },
   },
   // collections: [Users, Media, Brands, Categories, Subcategories],
-  globals: [Footer, HomePage],
-  collections: [Users, Media, Products, Brands, Categories, Subcategories],
+  globals: [Footer, HomePage, UpdateProductList],
+  collections: [
+    Users,
+    Images,
+    Videos,
+    Spreadsheets,
+    Products,
+    Brands,
+    Categories,
+    Subcategories,
+  ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {
@@ -52,7 +64,9 @@ export default buildConfig({
     // storage-adapter-placeholder
     s3Storage({
       collections: {
-        media: true,
+        images: true,
+        videos: true,
+        spreadsheets: true,
       },
       bucket: process.env.S3_BUCKET || "bucket",
       config: {

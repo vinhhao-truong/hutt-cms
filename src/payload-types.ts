@@ -67,7 +67,9 @@ export interface Config {
   blocks: {};
   collections: {
     users: User;
-    media: Media;
+    images: Image;
+    videos: Video;
+    spreadsheets: Spreadsheet;
     products: Product;
     brands: Brand;
     categories: Category;
@@ -87,7 +89,9 @@ export interface Config {
   };
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
-    media: MediaSelect<false> | MediaSelect<true>;
+    images: ImagesSelect<false> | ImagesSelect<true>;
+    videos: VideosSelect<false> | VideosSelect<true>;
+    spreadsheets: SpreadsheetsSelect<false> | SpreadsheetsSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
     brands: BrandsSelect<false> | BrandsSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
@@ -102,10 +106,12 @@ export interface Config {
   globals: {
     footer: Footer;
     homePage: HomePage;
+    updateProductList: UpdateProductList;
   };
   globalsSelect: {
     footer: FooterSelect<false> | FooterSelect<true>;
     homePage: HomePageSelect<false> | HomePageSelect<true>;
+    updateProductList: UpdateProductListSelect<false> | UpdateProductListSelect<true>;
   };
   locale: null;
   user: User & {
@@ -153,11 +159,49 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
+ * via the `definition` "images".
  */
-export interface Media {
+export interface Image {
   id: number;
   alt: string;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "videos".
+ */
+export interface Video {
+  id: number;
+  alt: string;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "spreadsheets".
+ */
+export interface Spreadsheet {
+  id: number;
+  name: string;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -181,7 +225,7 @@ export interface Product {
   brand?: (number | null) | Brand;
   category?: (number | Subcategory)[] | null;
   shortDescription: string;
-  description: {
+  description?: {
     root: {
       type: string;
       children: {
@@ -195,7 +239,7 @@ export interface Product {
       version: number;
     };
     [k: string]: unknown;
-  };
+  } | null;
   specifications?: {
     weight?: number | null;
     height?: number | null;
@@ -291,8 +335,16 @@ export interface PayloadLockedDocument {
         value: number | User;
       } | null)
     | ({
-        relationTo: 'media';
-        value: number | Media;
+        relationTo: 'images';
+        value: number | Image;
+      } | null)
+    | ({
+        relationTo: 'videos';
+        value: number | Video;
+      } | null)
+    | ({
+        relationTo: 'spreadsheets';
+        value: number | Spreadsheet;
       } | null)
     | ({
         relationTo: 'products';
@@ -369,10 +421,46 @@ export interface UsersSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media_select".
+ * via the `definition` "images_select".
  */
-export interface MediaSelect<T extends boolean = true> {
+export interface ImagesSelect<T extends boolean = true> {
   alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "videos_select".
+ */
+export interface VideosSelect<T extends boolean = true> {
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "spreadsheets_select".
+ */
+export interface SpreadsheetsSelect<T extends boolean = true> {
+  name?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -552,6 +640,17 @@ export interface HomePage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "updateProductList".
+ */
+export interface UpdateProductList {
+  id: number;
+  getProductList?: string | null;
+  multipleAdds?: (number | null) | Spreadsheet;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "footer_select".
  */
 export interface FooterSelect<T extends boolean = true> {
@@ -595,6 +694,17 @@ export interface HomePageSelect<T extends boolean = true> {
     | {
         caption?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "updateProductList_select".
+ */
+export interface UpdateProductListSelect<T extends boolean = true> {
+  getProductList?: T;
+  multipleAdds?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

@@ -75,16 +75,7 @@ const Navigation = () => {
         whileHover={{
           backgroundColor: "rgba(255, 255, 255, 1)",
         }}
-        animate={
-          isDown && !isOnTopBanner
-            ? { y: -65 }
-            : {
-                y: 0,
-                backgroundColor: isOnTopBanner
-                  ? "rgba(255, 255, 255, 0.7)"
-                  : "rgba(255, 255, 255, 1)",
-              }
-        }
+        animate={isDown && !isOnTopBanner ? { y: -65 } : { y: 0 }}
         transition={{ duration: 0.2 }}
         className="w-full fixed top-0 z-[5] md:text-sm md:h-[65px] shadow"
       >
@@ -123,41 +114,43 @@ const Navigation = () => {
           </nav>
         </div>
         {/* MOBILE NAV */}
-        <PageContainer className="block w-full h-full relative md:hidden py-1">
-          <nav className="flex items-center justify-between gap-6 list-none text-xs">
-            {navData.map((n, idx) => {
-              return (
-                <li className="" key={`nav-mobile-${idx}`}>
-                  <Link className="block" href={n.href}>
-                    {n.title}
-                  </Link>
-                </li>
-              );
-            })}
-          </nav>
-          <div className="relative flex items-center justify-between w-full h-full">
-            <Link
-              href={`/`}
-              className="relative"
-              scroll={false}
-              onClick={() => scrollToTop()}
-            >
-              <HuttLogo width="2.8em" height="2.8em" />
-              {/* </div> */}
-            </Link>
-            <nav className="flex items-end list-none gap-x-6 text-lg h-full flex-none">
-              <li className="flex items-center gap-0.5">
-                <Icon icon="material-symbols:search-rounded" className="" />
-                <p className="text-sm">TÌM KIẾM</p>
-              </li>
-              <li className="flex items-center gap-0.5">
-                <Icon icon="uil:cart" className="-translate-y-[1px]" />
-                <p className="text-sm hidden sm:block">GIỎ HÀNG</p>
-                <span className="text-sm">[2]</span>
-              </li>
+        <div className="h-full w-full md:hidden">
+          <PageContainer className="block w-full h-full relative py-1">
+            <nav className="flex items-center justify-between gap-6 list-none text-xs">
+              {navData.map((n, idx) => {
+                return (
+                  <li className="" key={`nav-mobile-${idx}`}>
+                    <Link className="block" href={n.href}>
+                      {n.title}
+                    </Link>
+                  </li>
+                );
+              })}
             </nav>
-          </div>
-        </PageContainer>
+            <div className="relative flex items-center justify-between w-full h-full">
+              <Link
+                href={`/`}
+                className="relative"
+                scroll={false}
+                onClick={() => scrollToTop()}
+              >
+                <HuttLogo width="2.8em" height="2.8em" />
+                {/* </div> */}
+              </Link>
+              <nav className="flex items-end list-none gap-x-6 text-lg h-full flex-none">
+                <li className="flex items-center gap-0.5">
+                  <Icon icon="material-symbols:search-rounded" className="" />
+                  <p className="text-sm">TÌM KIẾM</p>
+                </li>
+                <li className="flex items-center gap-0.5">
+                  <Icon icon="uil:cart" className="-translate-y-[1px]" />
+                  <p className="text-sm hidden sm:block">GIỎ HÀNG</p>
+                  <span className="text-sm">[2]</span>
+                </li>
+              </nav>
+            </div>
+          </PageContainer>
+        </div>
       </motion.header>
       <Modal isOpen={isNavOpen} setIsOpen={setIsNavOpen}>
         <div className="w-full h-full bg-white">
