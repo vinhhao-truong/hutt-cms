@@ -86,13 +86,13 @@ const AllCategories: React.FC<{
           >
             XEM TẤT CẢ {selected?.toUpperCase()}
           </MotionLink>
-          <ul className="flex gap-0.5 flex-wrap">
+          <ul className="flex gap-0.5 flex-wrap w-full">
             {data.categories?.[selected]?.products?.map((p, idx) => {
               const key = `${p.id}-${p.productName}-${idx}`;
               const isHovered = p.id === hoveredItemId;
 
               return (
-                <li className="aspect-[2/3] relative" key={key}>
+                <li className="aspect-[2/3] relative w-[200px]" key={key}>
                   <FadeIn>
                     <MotionLink
                       className="relative block w-full h-full px-2 py-4 bg-white border rounded-sm"

@@ -31,6 +31,8 @@ const HomePage = async () => {
     slug: "homePage",
   });
 
+  console.log("home d", homePageData);
+
   return (
     <div className="flex flex-col">
       <HomeHeroBanner data={homePageData.shopAllBanner} />

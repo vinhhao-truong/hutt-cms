@@ -10,6 +10,7 @@ const addAllCategories: AfterReadHook = async ({ doc, req: { payload } }) => {
       slug: true,
       subcategoryList: true,
     },
+    limit: 1000,
   });
 
   doc.allCategories = {

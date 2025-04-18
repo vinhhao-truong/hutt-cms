@@ -47,6 +47,7 @@ const getProductListFromCategories = async (
         id: true,
         productName: true,
       },
+      limit: 1000,
     }),
   ]);
 
