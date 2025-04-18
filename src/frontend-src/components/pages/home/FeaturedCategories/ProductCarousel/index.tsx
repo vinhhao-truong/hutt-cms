@@ -10,6 +10,7 @@ import color from "@/frontend-src/libs/constants/color";
 import Link from "next/link";
 import tailwindData from "@/frontend-src/libs/constants/tailwindData";
 import { v4 } from "uuid";
+import useResponsive from "@/frontend-hooks/useResponsive";
 
 function NextArrow(props: any) {
   const { className, style, onClick, disabled } = props;
@@ -88,11 +89,16 @@ const RenderedCarousel = ({
   children: React.ReactNode;
   length: number;
 }) => {
-  if (length >= 4) {
+  const responsive = useResponsive();
+  const smallerThanTablet = ["xs", "2xs", "sm"].includes(responsive);
+
+  const smallerCount = smallerThanTablet ? 2 : 4;
+
+  if (length >= smallerCount) {
     return (
       <Slider
         className={`relative w-full`}
-        slidesToShow={4}
+        slidesToShow={smallerCount}
         slidesToScroll={1}
         infinite
         // dots
@@ -111,7 +117,12 @@ const RenderedCarousel = ({
   }
 
   return (
-    <div className="relative grid w-full grid-cols-4">
+    <div
+      style={{
+        gridTemplateColumns: `repeat(${smallerCount}, minmax(0, 1fr))`,
+      }}
+      className="relative grid w-full"
+    >
       <NextArrow disabled />
       <PrevArrow disabled />
       {children}
@@ -138,7 +149,7 @@ const ProductCarousel: React.FC<{ data: Product[] }> = ({ data }) => {
               href={`/shop/detail/${p.id}`}
               initial={{ borderColor: tailwindData.colors.gray[300] }}
               whileHover={{ borderColor: color["system-blue-7"] }}
-              className={`aspect-[29/30] px-4 lg:p-6 relative z-0 group border block`}
+              className={`aspect-[29/30] p-2 sm:p-4 lg:p-6 relative z-0 group border block`}
             >
               {/* LEFT LINE */}
               {/* HEAD */}
@@ -184,11 +195,11 @@ const ProductCarousel: React.FC<{ data: Product[] }> = ({ data }) => {
                 </motion.button>
               </div>
               {hasDiscount && (
-                <div className="flex gap-1 items-end my-2">
-                  <p className="text-red-500 text-2xl 2xl:text-4xl">
+                <div className="flex gap-0.5 md:gap-1 items-center md:items-end my-2">
+                  <p className="text-red-500 text-lg md:text-2xl 2xl:text-4xl">
                     50.000<sup>đ</sup>
                   </p>
-                  <p className="line-through text-gray-400 text-sm 2xl:text-base">
+                  <p className="line-through text-gray-400 text-xs md:text-sm 2xl:text-base">
                     {/* {new Intl.NumberFormat("vi-VN", {
                 style: "currency",
                 currency: "VND",
@@ -198,11 +209,11 @@ const ProductCarousel: React.FC<{ data: Product[] }> = ({ data }) => {
                 </div>
               )}
               {!hasDiscount && (
-                <p className="text-system-blue-7 my-2 text-2xl 2xl:text-4xl">
+                <p className="text-system-blue-7 my-2 text-lg md:text-2xl 2xl:text-4xl">
                   20.000<sup>đ</sup>
                 </p>
               )}
-              <p className="text-xs group-hover:text-system-blue-7">
+              <p className="text-xs group-hover:text-system-blue-7 overflow-hidden text-clip">
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi,
                 iure in laboriosam vitae magni repellendus dolore? Facilis illum
                 ullam repellendus possimus ab nisi eius nihil vero laborum

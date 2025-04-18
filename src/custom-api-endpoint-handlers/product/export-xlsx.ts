@@ -23,8 +23,6 @@ export default async function exportXlsx(
 
     const products = productsRes.docs;
 
-    console.log("p count", products.length);
-
     const finalData: ProductXlsx[] = [];
 
     for (const {

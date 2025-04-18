@@ -31,7 +31,6 @@ const UpdateProductList: GlobalConfig = {
       hooks: {
         afterChange: [
           ({ value, operation }) => {
-            console.log("v", value);
             return value;
           },
         ],

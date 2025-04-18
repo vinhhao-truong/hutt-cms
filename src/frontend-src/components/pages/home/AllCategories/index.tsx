@@ -25,7 +25,7 @@ const AllCategories: React.FC<{
   const MotionLink = motion.create(Link);
 
   return (
-    <div className="grid grid-cols-8">
+    <div className="lg:grid grid-cols-8">
       {/* LEFT MENU */}
       <ul className="flex flex-col col-span-3 gap-1 pt-24 pb-40 border-r border-r-gray-400">
         {allCategories.map((c, idx) => {
@@ -99,6 +99,10 @@ const AllCategories: React.FC<{
                       href={`/shop/detail/${p.id}`}
                       onMouseEnter={() => setHoveredItemId(p.id)}
                       onMouseLeave={() => setHoveredItemId(null)}
+                      initial={{
+                        color: tailwindData.colors.gray[500],
+                        borderColor: tailwindData.colors.gray[200],
+                      }}
                       animate={
                         isHovered
                           ? {

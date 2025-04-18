@@ -19,7 +19,7 @@ const getBreakpoint = (width: number): Breakpoint => {
   return "2xl";
 };
 
-export function useResponsive(): Breakpoint {
+export default function useResponsive(): Breakpoint {
   const [breakpoint, setBreakpoint] = useState<Breakpoint>(() =>
     getBreakpoint(window.innerWidth)
   );

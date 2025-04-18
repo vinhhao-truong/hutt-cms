@@ -51,9 +51,9 @@ const Footer = async () => {
   ];
 
   return (
-    <footer className="grid grid-cols-10 border-t border-gray-400">
+    <footer className="lg:grid lg:grid-cols-10 border-t border-gray-400">
       {/* LEFT */}
-      <div className="flex flex-col items-center justify-between col-span-4 py-6 border-r border-r-gray-400">
+      <div className="flex flex-col items-center justify-between col-span-4 py-6 lg:border-r border-r-gray-400">
         <Link
           href={"/"}
           className="w-[100px] h-[50px]"

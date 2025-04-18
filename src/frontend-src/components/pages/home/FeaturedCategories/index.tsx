@@ -8,7 +8,6 @@ import { motion } from "framer-motion";
 import color, { colorRgba } from "@/frontend-src/libs/constants/color";
 import FadeIn from "@/frontend-src/components/animated/FadeIn";
 import { v4 } from "uuid";
-import HuttLogo from "@/assets/images/logo";
 
 const FeaturedCategories: React.FC<{
   data: HomePageDataTypes["featuredCategories"];
