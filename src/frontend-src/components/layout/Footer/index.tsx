@@ -13,6 +13,7 @@ interface RenderedUrl {
 }
 
 const Footer = async () => {
+  const signature = `@ Hútt Glassware ${moment().format("YYYY")}`;
   const payloadConfig = await config;
   const payload = await getPayload({ config: payloadConfig });
   const [footerData, categories] = await Promise.all([
@@ -62,7 +63,7 @@ const Footer = async () => {
         >
           <HuttLogo />
         </Link>
-        <ul className="flex flex-col items-center gap-4 text-sm font-medium">
+        <ul className="flex flex-col items-center gap-2 lg:gap-4 text-sm font-medium my-4 lg:my-0">
           {footerData?.mediaUrls?.map((l, idx) => {
             return (
               <li
@@ -81,17 +82,19 @@ const Footer = async () => {
             );
           })}
         </ul>
-        <p className="block text-sm text-center text-gray-700">
-          @ Hútt Glassware {moment().format("YYYY")}
+        <p className="hidden lg:block text-sm text-center text-gray-700">
+          {signature}
         </p>
       </div>
       {/* RIGHT */}
-      <div className="col-span-6 px-6 my-6">
-        <div className="flex mb-24 gap-36">
+      <div className="col-span-6 px-6 lg:my-6">
+        <div className="grid grid-cols-2 lg:flex lg:mb-24 lg:gap-36">
           {rightSide.map((r, idx) => (
-            <div className="" key={`right-side-${idx}`}>
-              <h4 className="mb-2 font-bold">{r.title}</h4>
-              <ul className="text-sm">
+            <div className="block mx-auto lg:mx-0" key={`right-side-${idx}`}>
+              <h4 className="text-center lg:text-left lg:mb-2 font-bold">
+                {r.title}
+              </h4>
+              <ul className="flex flex-col items-center lg:block text-sm">
                 {r?.links?.map((l, lIdx) => {
                   return (
                     <li className="" key={`right-link-${idx}-${lIdx}`}>
@@ -105,8 +108,11 @@ const Footer = async () => {
             </div>
           ))}
         </div>
-        <p className="text-sm font-medium whitespace-pre-line">
+        <p className="text-sm font-medium whitespace-pre-line my-6 lg:my-0">
           {footerData.generalDescription}
+        </p>
+        <p className="block lg:hidden text-sm text-center text-gray-700 my-2">
+          {signature}
         </p>
       </div>
     </footer>
