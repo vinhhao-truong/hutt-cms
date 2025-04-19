@@ -16,6 +16,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   const { children } = props;
 
   const isProduction = process.env.NODE_ENV === "production";
+  // const isProduction = true;
 
   // Temporary to hide the shop
   if (isProduction) {

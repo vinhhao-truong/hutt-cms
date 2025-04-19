@@ -87,7 +87,7 @@ const ConstructionPage: React.FC<{}> = () => {
           <Link
             rel="noreferrer"
             target="_blank"
-            href={`https://shopee.vn/hutt.glassware`}
+            href={`https://www.tiktok.com/@hutt_glassware`}
             className="flex flex-col gap-2 items-center"
           >
             <Icon
