@@ -10,6 +10,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import HuttLogo from "@/assets/images/logo";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import useResponsive from "@/frontend-hooks/useResponsive";
 
 const AllCategories: React.FC<{
   data: HomePageDataTypes["allCategories"];
@@ -18,6 +19,9 @@ const AllCategories: React.FC<{
   const [selected, setSelected] = useState<string>(allCategories?.[0]);
   const [hoveredItemId, setHoveredItemId] = useState<string | null>(null);
 
+  const responsive = useResponsive();
+  const isSmallerScreen = ["xs", "sm"].includes(responsive);
+
   if (!data || !data?.categories) {
     return <></>;
   }
@@ -25,16 +29,16 @@ const AllCategories: React.FC<{
   const MotionLink = motion.create(Link);
 
   return (
-    <div className="lg:grid grid-cols-8">
+    <div className="relative grid grid-cols-12 sm:grid-cols-9 lg:grid-cols-8">
       {/* LEFT MENU */}
-      <ul className="flex flex-col col-span-3 gap-1 pt-24 pb-40 border-r border-r-gray-400">
+      <ul className="sticky top-16 h-fit flex flex-col col-span-3 sm:col-span-3 gap-1 pt-24 pb-40">
         {allCategories.map((c, idx) => {
           const isSelected = selected === c;
           const count = data.categories?.[c]?.products?.length;
 
           return (
             <motion.li
-              className={`cursor-pointer flex items-center gap-2 ml-24`}
+              className={`cursor-pointer flex items-center gap-0.5 sm:gap-2 ml-1 sm:ml-4 lg:ml-16`}
               key={`all-categories-c-${idx}`}
               animate={{
                 color: isSelected ? "#000000" : tailwindData.colors.gray[300],
@@ -45,7 +49,7 @@ const AllCategories: React.FC<{
               onClick={() => setSelected(c)}
             >
               <motion.div
-                className="overflow-hidden"
+                className="hidden sm:block overflow-hidden"
                 initial={{ width: 0, opacity: 0 }}
                 animate={
                   isSelected
@@ -55,10 +59,12 @@ const AllCategories: React.FC<{
               >
                 <Icon icon="mdi:pan-right" className="text-4xl" />
               </motion.div>
-              <p className="text-5xl">
+              <p className="text-lg sm:text-3xl lg:text-5xl">
                 <span className="font-semibold">{c.toUpperCase()}</span>{" "}
                 {isSelected && (
-                  <sup className="text-base font-medium">[{count}]</sup>
+                  <sup className="text-xs sm:text-sm lg:text-base font-medium">
+                    [{count}]
+                  </sup>
                 )}
               </p>
             </motion.li>
@@ -68,7 +74,7 @@ const AllCategories: React.FC<{
       {/* RIGHT LIST */}
       {data?.categories?.[selected]?.products?.length &&
       data?.categories?.[selected]?.products?.length > 0 ? (
-        <div className="relative col-span-5 px-16 pt-24 pb-40">
+        <div className="relative col-span-9 sm:col-span-6 lg:col-span-5 px-2 sm:px-8 lg:px-16 pt-24 pb-40 border-l border-l-gray-400">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150px] opacity-[0.02] z-[-1]">
             <HuttLogo colored={false} />
           </div>
@@ -86,13 +92,13 @@ const AllCategories: React.FC<{
           >
             XEM TẤT CẢ {selected?.toUpperCase()}
           </MotionLink>
-          <ul className="flex gap-0.5 flex-wrap w-full">
+          <ul className="grid grid-cols-2 md:grid-cols-3 lg:flex gap-0.5 flex-wrap w-full">
             {data.categories?.[selected]?.products?.map((p, idx) => {
               const key = `${p.id}-${p.productName}-${idx}`;
               const isHovered = p.id === hoveredItemId;
 
               return (
-                <li className="aspect-[2/3] relative w-[200px]" key={key}>
+                <li className="aspect-[2/3] relative lg:w-[200px]" key={key}>
                   <FadeIn>
                     <MotionLink
                       className="relative block w-full h-full px-2 py-4 bg-white border rounded-sm"
@@ -104,7 +110,7 @@ const AllCategories: React.FC<{
                         borderColor: tailwindData.colors.gray[200],
                       }}
                       animate={
-                        isHovered
+                        isHovered && !isSmallerScreen
                           ? {
                               color: color["system-blue-7"],
                               borderColor: color["system-blue-7"],
@@ -128,19 +134,22 @@ const AllCategories: React.FC<{
                       />
                       <motion.div
                         animate={
-                          isHovered
+                          isHovered && !isSmallerScreen
                             ? { opacity: 1, y: 0 }
                             : { opacity: 0, y: 6 }
                         }
                         initial={{ opacity: 0, y: 6 }}
                         transition={{ duration: 0.25 }}
-                        className="relative flex items-center justify-between mt-1 text-sm font-medium"
+                        className="relative hidden md:flex items-center justify-between mt-1 text-sm font-medium"
                       >
                         <p className="">xem thêm</p>
                         <h3 className="">
                           20.000<sup>đ</sup>
                         </h3>
                       </motion.div>
+                      <h3 className="text-sm mt-1 font-medium md:hidden">
+                        20.000<sup>đ</sup>
+                      </h3>
                     </MotionLink>
                   </FadeIn>
                 </li>
@@ -149,7 +158,7 @@ const AllCategories: React.FC<{
           </ul>
         </div>
       ) : (
-        <div className="relative flex items-center justify-center col-span-5">
+        <div className="relative flex items-center justify-center col-span-9 sm:col-span-6 lg:col-span-5 border-l border-l-gray-400">
           <p className="italic text-gray-600">Hiện không có sản phẩm...</p>
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150px] opacity-[0.03] z-[-1]">
             <HuttLogo colored={false} />

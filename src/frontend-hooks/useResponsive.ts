@@ -1,40 +1,18 @@
-import { useEffect, useState } from "react";
+import { useMediaQuery, Theme } from "@mui/material";
 
-type Breakpoint = "xs" | "sm" | "md" | "lg" | "xl" | "2xl";
-
-const breakpoints: Record<Exclude<Breakpoint, "xs">, number> = {
-  sm: 640,
-  md: 768,
-  lg: 1024,
-  xl: 1280,
-  "2xl": 1536,
-};
-
-const getBreakpoint = (width: number): Breakpoint => {
-  if (width < breakpoints.sm) return "xs";
-  if (width < breakpoints.md) return "sm";
-  if (width < breakpoints.lg) return "md";
-  if (width < breakpoints.xl) return "lg";
-  if (width < breakpoints["2xl"]) return "xl";
-  return "2xl";
-};
+export type Breakpoint = "xs" | "sm" | "md" | "lg" | "xl" | "2xl";
 
 export default function useResponsive(): Breakpoint {
-  const [breakpoint, setBreakpoint] = useState<Breakpoint>(() =>
-    getBreakpoint(window.innerWidth)
-  );
+  const is2xl = useMediaQuery("(min-width: 1536px)");
+  const isXl = useMediaQuery("(min-width: 1280px)");
+  const isLg = useMediaQuery("(min-width: 1024px)");
+  const isMd = useMediaQuery("(min-width: 768px)");
+  const isSm = useMediaQuery("(min-width: 640px)");
 
-  useEffect(() => {
-    const handleResize = () => {
-      const newBreakpoint = getBreakpoint(window.innerWidth);
-      setBreakpoint((prev) => (prev !== newBreakpoint ? newBreakpoint : prev));
-    };
-
-    window.addEventListener("resize", handleResize);
-    handleResize(); // initial call on mount
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  return breakpoint;
+  if (is2xl) return "2xl";
+  if (isXl) return "xl";
+  if (isLg) return "lg";
+  if (isMd) return "md";
+  if (isSm) return "sm";
+  return "xs";
 }

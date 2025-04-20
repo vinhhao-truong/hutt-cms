@@ -13,10 +13,13 @@ import { v4 } from "uuid";
 import useResponsive from "@/frontend-hooks/useResponsive";
 
 function NextArrow(props: any) {
+  const responsive = useResponsive();
+  const smallerThanTablet = ["xs", "2xs", "sm"].includes(responsive);
   const { className, style, onClick, disabled } = props;
+
   return (
     <motion.button
-      className={`${disabled ? `bg-gray-100 text-gray-300 border-gray-300 cursor-default` : ``} absolute bottom-[calc(100%+24px)] rounded-sm w-10 h-[26px] right-[128px] border-[1.5px] flex items-center justify-center`}
+      className={`${smallerThanTablet ? `hidden` : ``} ${disabled ? `bg-gray-100 text-gray-300 border-gray-300 cursor-default` : ``} absolute bottom-[calc(100%+24px)] rounded-sm w-10 h-[26px] right-[128px] border-[1.5px] flex items-center justify-center`}
       onClick={onClick}
       initial={
         !disabled
@@ -48,10 +51,13 @@ function NextArrow(props: any) {
 }
 
 function PrevArrow(props: any) {
+  const responsive = useResponsive();
+  const smallerThanTablet = ["xs", "2xs", "sm"].includes(responsive);
   const { className, style, onClick, disabled } = props;
+
   return (
     <motion.button
-      className={`${disabled ? `bg-gray-100 text-gray-300 border-gray-300 cursor-default` : ``} absolute bottom-[calc(100%+24px)] rounded-sm w-10 h-[26px] right-[172px] border-[1.5px] flex items-center justify-center`}
+      className={`${smallerThanTablet ? `hidden` : ``} ${disabled ? `bg-gray-100 text-gray-300 border-gray-300 cursor-default` : ``} absolute bottom-[calc(100%+24px)] rounded-sm w-10 h-[26px] right-[172px] border-[1.5px] flex items-center justify-center`}
       onClick={onClick}
       initial={
         !disabled
@@ -101,6 +107,8 @@ const RenderedCarousel = ({
         slidesToShow={smallerCount}
         slidesToScroll={1}
         infinite
+        centerMode={smallerThanTablet}
+        centerPadding={`20px`}
         // dots
         autoplay
         autoplaySpeed={5000}
@@ -110,6 +118,8 @@ const RenderedCarousel = ({
         // customPaging={(n) => <div key={`${v4()}-${n}`}></div>}
         nextArrow={<NextArrow />}
         prevArrow={<PrevArrow />}
+        // swipe={smallerThanTablet}
+        swipeToSlide={smallerThanTablet}
       >
         {children}
       </Slider>
@@ -144,7 +154,7 @@ const ProductCarousel: React.FC<{ data: Product[] }> = ({ data }) => {
         const hasDiscount = idx % 2 === 0;
 
         return (
-          <div className="px-0.5" key={key}>
+          <div className="px-[0.5px] sm:px-0.5" key={key}>
             <MotionLink
               href={`/shop/detail/${p.id}`}
               initial={{ borderColor: tailwindData.colors.gray[300] }}
@@ -154,10 +164,15 @@ const ProductCarousel: React.FC<{ data: Product[] }> = ({ data }) => {
               {/* LEFT LINE */}
               {/* HEAD */}
               <div className="mb-2 tracking-tight">
-                <h3 className="mb-1 text-xl font-semibold uppercase group-hover:text-system-blue-7">
+                <h3 className="mb-1 text-xl font-semibold uppercase lg:group-hover:text-system-blue-7 group-active:text-system-blue-7 h-[55px] line-clamp-2">
                   {p.productName}
                 </h3>
-                <p className="text-xs group-hover:text-system-blue-7">
+                <h4
+                  className={`${!!p.productCode ? "px-1" : ""} w-fit bg-gray-400 lg:group-hover:bg-system-blue-7 group-active:bg-system-blue-7 text-white h-[16px] text-xs font-medium mb-1`}
+                >
+                  {p.productCode}
+                </h4>
+                <p className="text-xs lg:group-hover:text-system-blue-7 group-active:text-system-blue-7">
                   150ml / 15cm x 10cm
                 </p>
               </div>
@@ -213,11 +228,8 @@ const ProductCarousel: React.FC<{ data: Product[] }> = ({ data }) => {
                   20.000<sup>đ</sup>
                 </p>
               )}
-              <p className="text-xs group-hover:text-system-blue-7 overflow-hidden text-clip">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi,
-                iure in laboriosam vitae magni repellendus dolore? Facilis illum
-                ullam repellendus possimus ab nisi eius nihil vero laborum
-                incidunt, nam officiis!
+              <p className="text-xs lg:group-hover:text-system-blue-7 group-active:text-system-blue-7 overflow-hidden text-clip line-clamp-4 h-[65px]">
+                {p.shortDescription}
               </p>
             </MotionLink>
           </div>

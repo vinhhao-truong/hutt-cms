@@ -42,5 +42,6 @@ export default {
       addVariant("group-1-hover", ":merge(.group-1):hover &");
       addVariant("group-2-hover", ":merge(.group-2):hover &");
     }),
+    require("@tailwindcss/line-clamp"),
   ],
 } satisfies Config;

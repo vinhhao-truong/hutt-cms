@@ -46,6 +46,10 @@ const getProductListFromCategories = async (
       select: {
         id: true,
         productName: true,
+        productCode: true,
+        specifications: true,
+        shortDescription: true,
+        prices: true,
       },
       limit: 1000,
     }),
