@@ -8,7 +8,6 @@ import ConstructionPage from "@/frontend-src/components/pages/construction/Const
 import { getPayload } from "payload";
 import config from "@/payload.config";
 import axios from "axios";
-import { error } from "console";
 import { headers as nextHeaders } from "next/headers";
 
 export const metadata = {
@@ -37,12 +36,19 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
     );
   }
 
+  const pathname = headers.get("x-invoke-path") || "/";
+  const proto = headers.get("x-forwarded-proto") || "http";
+  const host = headers.get("x-forwarded-host") || "localhost:3000";
+  const hideLayout = ["/product-bulk-update"].includes(pathname);
+
+  console.log(headers);
+
   return (
     <html lang="en">
       <body>
-        <Navigation />
+        {!hideLayout && <Navigation />}
         <main>{children}</main>
-        <Footer />
+        {!hideLayout && <Footer />}
       </body>
     </html>
   );

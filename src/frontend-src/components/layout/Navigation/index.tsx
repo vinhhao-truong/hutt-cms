@@ -35,7 +35,9 @@ const navData = [
   },
 ];
 
-const Navigation = () => {
+const Navigation: React.FC<{ hideLayoutPages?: string[] }> = ({
+  hideLayoutPages = [],
+}) => {
   const [isNavOpen, setIsNavOpen] = useState<boolean>(false);
   const [currentScreenHeight, setCurrentScreenHeight] = useState<number>(0);
   const [currentVelocity, setCurrentVelocity] = useState<number>(1);

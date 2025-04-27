@@ -2,6 +2,7 @@ import React from "react";
 import { getPayload } from "payload";
 import config from "@/payload.config";
 import { headers as nextHeaders } from "next/headers";
+import { redirect } from "next/navigation";
 
 const ProductBulkUpdatePage = async () => {
   const payloadConfig = await config;
@@ -9,9 +10,11 @@ const ProductBulkUpdatePage = async () => {
   const headers = await nextHeaders();
   const auth = await payload.auth({ headers });
 
-  console.log("auth", auth.user);
+  if (!auth.user) {
+    redirect("/admin");
+  }
 
-  return <div>ProductBulkUpdate</div>;
+  return <form className="h-screen">ProductBulkUpdate</form>;
 };
 
 export default ProductBulkUpdatePage;
