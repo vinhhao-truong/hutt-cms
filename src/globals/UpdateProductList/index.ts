@@ -13,28 +13,36 @@ const UpdateProductList: GlobalConfig = {
     },
   },
   fields: [
+    // {
+    //   name: "getProductList",
+    //   type: "text",
+    //   admin: {
+    //     components: { Field: "/custom-fields/DownloadProductsBtn" },
+    //   },
+    //   virtual: true,
+    // },
+    // {
+    //   name: "multipleAdds",
+    //   label: {
+    //     vi: "Thêm Hàng Loạt",
+    //   },
+    //   type: "upload",
+    //   relationTo: "spreadsheets",
+    //   hooks: {
+    //     afterChange: [
+    //       ({ value, operation }) => {
+    //         return value;
+    //       },
+    //     ],
+    //   },
+    // },
     {
-      name: "getProductList",
+      name: "productBulkUpdate",
       type: "text",
       admin: {
-        components: { Field: "/custom-fields/DownloadProductsBtn" },
+        components: { Field: "/custom-fields/LinkToProductBulkUpdate" },
       },
       virtual: true,
-    },
-    {
-      name: "multipleAdds",
-      label: {
-        vi: "Thêm Hàng Loạt",
-      },
-      type: "upload",
-      relationTo: "spreadsheets",
-      hooks: {
-        afterChange: [
-          ({ value, operation }) => {
-            return value;
-          },
-        ],
-      },
     },
   ],
 };

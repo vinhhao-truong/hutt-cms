@@ -71,7 +71,7 @@ const Navigation = () => {
   return (
     <>
       <motion.header
-        initial={{ backgroundColor: "rgba(255, 255, 255, 0.7)" }}
+        initial={{ backgroundColor: "rgba(255, 255, 255, 0.9)" }}
         whileHover={{
           backgroundColor: "rgba(255, 255, 255, 1)",
         }}

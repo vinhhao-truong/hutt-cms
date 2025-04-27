@@ -644,8 +644,7 @@ export interface HomePage {
  */
 export interface UpdateProductList {
   id: number;
-  getProductList?: string | null;
-  multipleAdds?: (number | null) | Spreadsheet;
+  productBulkUpdate?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -703,8 +702,7 @@ export interface HomePageSelect<T extends boolean = true> {
  * via the `definition` "updateProductList_select".
  */
 export interface UpdateProductListSelect<T extends boolean = true> {
-  getProductList?: T;
-  multipleAdds?: T;
+  productBulkUpdate?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

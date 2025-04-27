@@ -5,6 +5,11 @@ import "./style.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ConstructionPage from "@/frontend-src/components/pages/construction/ConstructionPage";
+import { getPayload } from "payload";
+import config from "@/payload.config";
+import axios from "axios";
+import { error } from "console";
+import { headers as nextHeaders } from "next/headers";
 
 export const metadata = {
   description:
@@ -14,12 +19,15 @@ export const metadata = {
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
   const { children } = props;
+  const payloadConfig = await config;
+  const payload = await getPayload({ config: payloadConfig });
+  const headers = await nextHeaders();
+  const auth = await payload.auth({ headers });
 
   const isProduction = process.env.NODE_ENV === "production";
-  // const isProduction = true;
 
   // Temporary to hide the shop
-  if (isProduction) {
+  if (isProduction && !auth.user) {
     return (
       <html lang="en">
         <body>

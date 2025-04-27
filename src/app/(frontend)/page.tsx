@@ -8,6 +8,7 @@ import Introduction from "@/frontend-src/components/pages/home/Introduction";
 import AllCategories from "@/frontend-src/components/pages/home/AllCategories";
 import ShopAllBanner from "@/frontend-src/components/pages/home/ShopAllBanner";
 import ConstructionPage from "@/frontend-src/components/pages/construction/ConstructionPage";
+import { headers as nextHeaders } from "next/headers";
 
 export interface HomePageDataTypes
   extends Omit<HomePageTypes, "featuredCategories"> {
