@@ -5,14 +5,15 @@ import { getPayload } from "payload";
 import config from "@/payload.config";
 import Link from "next/link";
 import scrollToTop from "@/frontend-src/libs/utils/ui/scrollToTop";
+import FooterClient from "./FooterClient";
 
-interface RenderedUrl {
+export interface FooterRenderedUrl {
   label: string | null | undefined;
   href: string | null | undefined;
   target: "_self" | "_blank";
 }
 
-const Footer = async () => {
+const Footer = async ({ hideLayoutPages }: { hideLayoutPages?: string[] }) => {
   const signature = `@ Hútt Glassware ${moment().format("YYYY")}`;
   const payloadConfig = await config;
   const payload = await getPayload({ config: payloadConfig });
@@ -27,13 +28,13 @@ const Footer = async () => {
     }),
   ]);
 
-  const renderedCategories: RenderedUrl[] =
+  const renderedCategories: FooterRenderedUrl[] =
     categories.docs.map((c, idx) => ({
       label: c.categoryName,
       href: `/category/${c.slug}`,
       target: "_self",
     })) ?? [];
-  const renderedInfo: RenderedUrl[] =
+  const renderedInfo: FooterRenderedUrl[] =
     footerData?.infoInternalUrls?.map((info, idx) => ({
       label: info.infoLabel,
       href: info.infoUrl,
@@ -52,70 +53,12 @@ const Footer = async () => {
   ];
 
   return (
-    <footer className="lg:grid lg:grid-cols-10 border-t border-gray-400">
-      {/* LEFT */}
-      <div className="flex flex-col items-center justify-between col-span-4 py-6 lg:border-r border-r-gray-400">
-        <Link
-          href={"/"}
-          className="w-[100px] h-[50px]"
-          onClick={scrollToTop}
-          scroll={false}
-        >
-          <HuttLogo />
-        </Link>
-        <ul className="flex flex-col items-center gap-2 lg:gap-4 text-sm font-medium my-4 lg:my-0">
-          {footerData?.mediaUrls?.map((l, idx) => {
-            return (
-              <li
-                className="text-center transition duration-75 underline-offset-2 hover:underline"
-                key={`left-media-url-${idx}`}
-              >
-                <Link
-                  href={l.mediaUrl ?? ""}
-                  target="_blank"
-                  rel="noreferrer"
-                  className=""
-                >
-                  {l.mediaLabel}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-        <p className="hidden lg:block text-sm text-center text-gray-700">
-          {signature}
-        </p>
-      </div>
-      {/* RIGHT */}
-      <div className="col-span-6 px-6 lg:my-6">
-        <div className="grid grid-cols-2 lg:flex lg:mb-24 lg:gap-36">
-          {rightSide.map((r, idx) => (
-            <div className="block mx-auto lg:mx-0" key={`right-side-${idx}`}>
-              <h4 className="text-center lg:text-left lg:mb-2 font-bold">
-                {r.title}
-              </h4>
-              <ul className="flex flex-col items-center lg:block text-sm">
-                {r?.links?.map((l, lIdx) => {
-                  return (
-                    <li className="" key={`right-link-${idx}-${lIdx}`}>
-                      <Link href={l.href ?? ""} target={l.target}>
-                        {l.label}
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          ))}
-        </div>
-        <p className="text-sm font-medium whitespace-pre-line my-6 lg:my-0">
-          {footerData.generalDescription}
-        </p>
-        <p className="block lg:hidden text-sm text-center text-gray-700 my-2">
-          {signature}
-        </p>
-      </div>
-    </footer>
+    <FooterClient
+      rightSide={rightSide}
+      signature={signature}
+      footerData={footerData}
+      hideLayoutPathnames={hideLayoutPages}
+    />
   );
 };
 

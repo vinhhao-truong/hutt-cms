@@ -13,4 +13,5 @@ export interface ProductXlsx {
   packageCostVariation?: number | null | undefined;
   grossPriceVariation?: number | null | undefined;
   netPriceVariation?: number | null | undefined;
+  createdAt?: string;
 }

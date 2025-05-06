@@ -15,6 +15,7 @@ import {
 import color, { colorRgba } from "@/frontend-src/libs/constants/color";
 import HuttLogo from "@/assets/images/logo";
 import scrollToTop from "@/frontend-src/libs/utils/ui/scrollToTop";
+import { useParams, usePathname } from "next/navigation";
 
 const navData = [
   {
@@ -38,6 +39,8 @@ const navData = [
 const Navigation: React.FC<{ hideLayoutPages?: string[] }> = ({
   hideLayoutPages = [],
 }) => {
+  const pathname = usePathname();
+
   const [isNavOpen, setIsNavOpen] = useState<boolean>(false);
   const [currentScreenHeight, setCurrentScreenHeight] = useState<number>(0);
   const [currentVelocity, setCurrentVelocity] = useState<number>(1);
@@ -70,7 +73,11 @@ const Navigation: React.FC<{ hideLayoutPages?: string[] }> = ({
     }
   });
 
-  return (
+  const isHidden = hideLayoutPages.includes(pathname);
+
+  return isHidden ? (
+    <></>
+  ) : (
     <>
       <motion.header
         initial={{ backgroundColor: "rgba(255, 255, 255, 0.9)" }}

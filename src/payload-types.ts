@@ -251,25 +251,25 @@ export interface Product {
   enableVariations?: boolean | null;
   isActive?: boolean | null;
   costs?: {
-    productCost: number;
-    packageCost: number;
+    productCost?: number | null;
+    packageCost?: number | null;
   };
   prices?: {
-    grossPrice: number;
+    grossPrice?: number | null;
     netPrice?: number | null;
   };
   variations?:
     | {
+        id?: string | null;
         variationName?: string | null;
         costsVariation?: {
-          productCostVariation: number;
-          packageCostVariation: number;
+          productCostVariation?: number | null;
+          packageCostVariation?: number | null;
         };
         pricesVariation?: {
-          grossPriceVariation: number;
+          grossPriceVariation?: number | null;
           netPriceVariation?: number | null;
         };
-        id?: string | null;
       }[]
     | null;
   updatedAt: string;
@@ -512,6 +512,7 @@ export interface ProductsSelect<T extends boolean = true> {
   variations?:
     | T
     | {
+        id?: T;
         variationName?: T;
         costsVariation?:
           | T
@@ -525,7 +526,6 @@ export interface ProductsSelect<T extends boolean = true> {
               grossPriceVariation?: T;
               netPriceVariation?: T;
             };
-        id?: T;
       };
   updatedAt?: T;
   createdAt?: T;

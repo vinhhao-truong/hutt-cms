@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
-import axios from "axios";
+import { useState } from "react";
 import moment from "moment";
+import axios from "axios";
 import { Icon } from "@iconify/react/dist/iconify.js";
 
 const DownloadButton = () => {
@@ -33,14 +33,7 @@ const DownloadButton = () => {
           setIsGetting(false);
         }
       }}
-      style={{
-        width: "200px",
-        height: "30px",
-        marginBottom: "2rem",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
+      className="bg-system-blue-6 text-white h-[50px] w-[180px] mx-auto rounded-sm flex justify-center items-center"
     >
       {isGetting ? <Icon icon={`codex:loader`} /> : "Get Product List"}
     </button>

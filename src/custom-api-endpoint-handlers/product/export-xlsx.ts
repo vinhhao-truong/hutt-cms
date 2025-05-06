@@ -16,6 +16,7 @@ export default async function exportXlsx(
         costs: true,
         prices: true,
         variations: true,
+        createdAt: true,
       },
       user: req.user,
       limit: 2000,
@@ -33,12 +34,14 @@ export default async function exportXlsx(
       costs,
       prices,
       variations,
+      createdAt,
     } of products) {
       const data: ProductXlsx = {
         productId: id,
         productName,
         productCode,
         shortDescription,
+        createdAt,
       };
 
       if (variations && variations?.length > 0) {
@@ -48,13 +51,15 @@ export default async function exportXlsx(
           pricesVariation,
           costsVariation,
         } of variations) {
-          data.variationId = vId;
-          data.variationName = variationName;
-          data.netPriceVariation = pricesVariation?.netPriceVariation;
-          data.grossPriceVariation = pricesVariation?.grossPriceVariation;
-          data.packageCostVariation = costsVariation?.packageCostVariation;
-          data.productCostVariation = costsVariation?.productCostVariation;
-          finalData.push(data);
+          const newVar = { ...data };
+
+          newVar.variationId = vId;
+          newVar.variationName = variationName;
+          newVar.netPriceVariation = pricesVariation?.netPriceVariation;
+          newVar.grossPriceVariation = pricesVariation?.grossPriceVariation;
+          newVar.packageCostVariation = costsVariation?.packageCostVariation;
+          newVar.productCostVariation = costsVariation?.productCostVariation;
+          finalData.push(newVar);
         }
         continue;
       }
@@ -66,6 +71,10 @@ export default async function exportXlsx(
     }
 
     const worksheet = xlsxUtils.json_to_sheet(finalData);
+
+    console.log("p", JSON.stringify(products, null, 2));
+    console.log("f", JSON.stringify(finalData, null, 2));
+
     const workbook = xlsxUtils.book_new();
     xlsxUtils.book_append_sheet(workbook, worksheet, "Products");
 

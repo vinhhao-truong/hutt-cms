@@ -36,19 +36,14 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
     );
   }
 
-  const pathname = headers.get("x-invoke-path") || "/";
-  const proto = headers.get("x-forwarded-proto") || "http";
-  const host = headers.get("x-forwarded-host") || "localhost:3000";
-  const hideLayout = ["/product-bulk-update"].includes(pathname);
-
-  console.log(headers);
+  const hideLayoutPages = ["/product-bulk-update"];
 
   return (
     <html lang="en">
       <body>
-        {!hideLayout && <Navigation />}
+        <Navigation hideLayoutPages={hideLayoutPages} />
         <main>{children}</main>
-        {!hideLayout && <Footer />}
+        <Footer hideLayoutPages={hideLayoutPages} />
       </body>
     </html>
   );
