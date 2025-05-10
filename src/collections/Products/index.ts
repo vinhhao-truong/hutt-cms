@@ -35,23 +35,59 @@ const Products: CollectionConfig = {
     },
   },
   fields: [
-    ID,
     {
-      type: "row",
-      fields: [ProductName, ProductCode],
+      type: "tabs",
+      tabs: [
+        {
+          label: {
+            en: "Management",
+            vi: "Quản Lý",
+          },
+          fields: [
+            ID,
+            {
+              type: "row",
+              fields: [ProductName, ProductCode],
+            },
+            {
+              type: "row",
+              fields: [Brand, Category],
+            },
+            ShortDescription,
+            Description,
+            Specifications,
+            EnableVariations,
+            IsActive,
+            {
+              type: "tabs",
+              tabs: [
+                {
+                  label: {
+                    en: "Unique (NO Variations)",
+                    vi: "Độc Nhất (KHÔNG Phân Loại)",
+                  },
+                  fields: [getCostsGroup(), getPriceGroup()],
+                },
+                {
+                  label: {
+                    en: "Variations",
+                    vi: "Phân Loại",
+                  },
+                  fields: [Variations],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: {
+            en: "Efficiency",
+            vi: "Hiệu Quả Hoạt Động",
+          },
+          fields: [],
+        },
+      ],
     },
-    {
-      type: "row",
-      fields: [Brand, Category],
-    },
-    ShortDescription,
-    Description,
-    Specifications,
-    EnableVariations,
-    IsActive,
-    getCostsGroup(),
-    getPriceGroup(),
-    Variations,
   ],
   hooks: {
     afterRead: [

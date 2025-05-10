@@ -284,7 +284,7 @@ export interface Brand {
   brandName: string;
   brandCode?: string | null;
   productList?: {
-    docs?: (string | Product)[];
+    docs?: (number | Product)[];
     hasNextPage?: boolean;
     totalDocs?: number;
   };
@@ -304,7 +304,7 @@ export interface Subcategory {
     totalDocs?: number;
   };
   productList?: {
-    docs?: (string | Product)[];
+    docs?: (number | Product)[];
     hasNextPage?: boolean;
     totalDocs?: number;
   };
@@ -348,7 +348,7 @@ export interface PayloadLockedDocument {
       } | null)
     | ({
         relationTo: 'products';
-        value: string | Product;
+        value: number | Product;
       } | null)
     | ({
         relationTo: 'brands';

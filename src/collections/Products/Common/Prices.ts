@@ -1,5 +1,4 @@
 import { Field } from "payload";
-import { hasVariations } from "../Variations";
 
 const getPriceField = (
   name: string,
@@ -44,9 +43,9 @@ const getPriceGroup = (isVariation?: boolean): Field => {
       en: "Prices",
       vi: "Giá Bán",
     },
-    admin: {
-      condition: hasVariations(!isVariation),
-    },
+    // admin: {
+    //   condition: hasVariations(!isVariation),
+    // },
   };
 };
 
