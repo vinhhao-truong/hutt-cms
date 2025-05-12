@@ -67,9 +67,9 @@ const UploadProducts = () => {
               grossPriceVariation: prod.grossPriceVariation
                 ? prod.grossPriceVariation
                 : null,
-              netPriceVariation: prod.netPriceVariation
-                ? prod.netPriceVariation
-                : null,
+              // netPriceVariation: prod.netPriceVariation
+              //   ? prod.netPriceVariation
+              //   : null,
             },
             costsVariation: {
               productCostVariation: prod.productCostVariation
@@ -93,7 +93,7 @@ const UploadProducts = () => {
           const hasVariation = thisVariant[0]?.id;
           const prices: Product["prices"] = {
             grossPrice: hasVariation ? null : prod.grossPrice,
-            netPrice: hasVariation ? null : prod.netPrice,
+            // netPrice: hasVariation ? null : prod.netPrice,
           };
 
           const costs: Product["costs"] = {

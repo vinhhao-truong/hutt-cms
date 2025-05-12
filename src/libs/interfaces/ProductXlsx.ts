@@ -6,7 +6,7 @@ export interface ProductXlsx {
   productCost?: number | null | undefined;
   packageCost?: number | null | undefined;
   grossPrice?: number | null | undefined;
-  netPrice?: number | null | undefined;
+  // netPrice?: number | null | undefined;
   variationId?: string | null | undefined;
   variationName?: string | null | undefined;
   productCostVariation?: number | null | undefined;

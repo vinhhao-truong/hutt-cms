@@ -55,7 +55,7 @@ export default async function exportXlsx(
 
           newVar.variationId = vId;
           newVar.variationName = variationName;
-          newVar.netPriceVariation = pricesVariation?.netPriceVariation;
+          // newVar.netPriceVariation = pricesVariation?.netPriceVariation;
           newVar.grossPriceVariation = pricesVariation?.grossPriceVariation;
           newVar.packageCostVariation = costsVariation?.packageCostVariation;
           newVar.productCostVariation = costsVariation?.productCostVariation;
@@ -64,7 +64,7 @@ export default async function exportXlsx(
         continue;
       }
       data.grossPrice = prices?.grossPrice;
-      data.netPrice = prices?.netPrice;
+      // data.netPrice = prices?.netPrice;
       data.packageCost = costs?.packageCost;
       data.productCost = costs?.productCost;
       finalData.push(data);
