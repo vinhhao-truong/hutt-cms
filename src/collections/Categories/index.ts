@@ -1,4 +1,4 @@
-import formatTextToSlug from "@/frontend-src/libs/utils/format/formatTextToSlug";
+import formatTextToSlug from "@/libs/utils/format/formatTextToSlug";
 import { CollectionConfig, Field } from "payload";
 
 const Categories: CollectionConfig = {

@@ -14,6 +14,8 @@ import IsActive from "./Common/IsActive";
 import ShortDescription from "./Common/ShortDescription";
 import Description from "./Common/Description";
 import exportXlsx from "@/custom-api-endpoint-handlers/product/export-xlsx";
+import Hashtag from "./Common/Hashtag";
+import Usage from "./Common/Usage";
 
 const Products: CollectionConfig = {
   slug: "products",
@@ -55,6 +57,8 @@ const Products: CollectionConfig = {
             },
             ShortDescription,
             Description,
+            Usage,
+            Hashtag,
             Specifications,
             EnableVariations,
             IsActive,

@@ -2,8 +2,8 @@
 
 import { HomePageDataTypes } from "@/app/(frontend)/page";
 import FadeIn from "@/frontend-src/components/animated/FadeIn";
-import color from "@/frontend-src/libs/constants/color";
-import tailwindData from "@/frontend-src/libs/constants/tailwindData";
+import color from "@/libs/constants/color";
+import tailwindData from "@/libs/constants/tailwindData";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import React, { useState } from "react";

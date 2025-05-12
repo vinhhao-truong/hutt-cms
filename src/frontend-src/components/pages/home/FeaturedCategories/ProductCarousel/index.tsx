@@ -6,9 +6,9 @@ import React, { useState } from "react";
 import Slider from "react-slick";
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
-import color from "@/frontend-src/libs/constants/color";
+import color from "@/libs/constants/color";
 import Link from "next/link";
-import tailwindData from "@/frontend-src/libs/constants/tailwindData";
+import tailwindData from "@/libs/constants/tailwindData";
 import { v4 } from "uuid";
 import useResponsive from "@/frontend-hooks/useResponsive";
 

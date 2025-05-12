@@ -12,9 +12,9 @@ import {
   useScroll,
   useVelocity,
 } from "framer-motion";
-import color, { colorRgba } from "@/frontend-src/libs/constants/color";
+import color, { colorRgba } from "@/libs/constants/color";
 import HuttLogo from "@/assets/images/logo";
-import scrollToTop from "@/frontend-src/libs/utils/ui/scrollToTop";
+import scrollToTop from "@/libs/utils/ui/scrollToTop";
 import { useParams, usePathname } from "next/navigation";
 
 const navData = [

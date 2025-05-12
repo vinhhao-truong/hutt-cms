@@ -1,7 +1,7 @@
 "use client";
 
 import { HomePageDataTypes } from "@/app/(frontend)/page";
-import color from "@/frontend-src/libs/constants/color";
+import color from "@/libs/constants/color";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { motion } from "framer-motion";
 import Image from "next/image";

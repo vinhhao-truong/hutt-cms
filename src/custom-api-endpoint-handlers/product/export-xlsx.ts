@@ -1,5 +1,5 @@
 import { PayloadHandler, PayloadRequest } from "payload";
-import { ProductXlsx } from "@/frontend-src/libs/interfaces/ProductXlsx";
+import { ProductXlsx } from "@/libs/interfaces/ProductXlsx";
 import { utils as xlsxUtils, write as xlsxWrite } from "xlsx";
 import moment from "moment";
 

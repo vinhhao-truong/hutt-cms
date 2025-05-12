@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import HuttLogo from "@/assets/images/logo";
-import scrollToTop from "@/frontend-src/libs/utils/ui/scrollToTop";
+import scrollToTop from "@/libs/utils/ui/scrollToTop";
 import { Footer } from "@/payload-types";
 import { FooterRenderedUrl } from ".";
 import { usePathname } from "next/navigation";

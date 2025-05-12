@@ -74,6 +74,7 @@ export interface Config {
     brands: Brand;
     categories: Category;
     subcategories: Subcategory;
+    hashtags: Hashtag;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -86,6 +87,9 @@ export interface Config {
       category: 'categories';
       productList: 'products';
     };
+    hashtags: {
+      productList: 'products';
+    };
   };
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
@@ -96,6 +100,7 @@ export interface Config {
     brands: BrandsSelect<false> | BrandsSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     subcategories: SubcategoriesSelect<false> | SubcategoriesSelect<true>;
+    hashtags: HashtagsSelect<false> | HashtagsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -240,6 +245,8 @@ export interface Product {
     };
     [k: string]: unknown;
   } | null;
+  usage?: string | null;
+  hashtag?: (number | Hashtag)[] | null;
   specifications?: {
     weight?: number | null;
     height?: number | null;
@@ -324,6 +331,21 @@ export interface Category {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "hashtags".
+ */
+export interface Hashtag {
+  id: number;
+  hashtag: string;
+  productList?: {
+    docs?: (number | Product)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -360,6 +382,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'subcategories';
         value: number | Subcategory;
+      } | null)
+    | ({
+        relationTo: 'hashtags';
+        value: number | Hashtag;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -484,6 +510,8 @@ export interface ProductsSelect<T extends boolean = true> {
   category?: T;
   shortDescription?: T;
   description?: T;
+  usage?: T;
+  hashtag?: T;
   specifications?:
     | T
     | {
@@ -557,6 +585,16 @@ export interface CategoriesSelect<T extends boolean = true> {
 export interface SubcategoriesSelect<T extends boolean = true> {
   subcategoryName?: T;
   category?: T;
+  productList?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "hashtags_select".
+ */
+export interface HashtagsSelect<T extends boolean = true> {
+  hashtag?: T;
   productList?: T;
   updatedAt?: T;
   createdAt?: T;

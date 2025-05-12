@@ -1,4 +1,4 @@
-import getProductListFromCategories from "@/frontend-src/libs/utils/get/getProductListFromCategories";
+import getProductListFromCategories from "@/libs/utils/get/getProductListFromCategories";
 import { Field } from "payload";
 
 const EditorFeaturedCategories: Field = {

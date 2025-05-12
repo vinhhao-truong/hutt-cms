@@ -4,7 +4,7 @@ import HuttLogo from "@/assets/images/logo";
 import { getPayload } from "payload";
 import config from "@/payload.config";
 import Link from "next/link";
-import scrollToTop from "@/frontend-src/libs/utils/ui/scrollToTop";
+import scrollToTop from "@/libs/utils/ui/scrollToTop";
 import FooterClient from "./FooterClient";
 
 export interface FooterRenderedUrl {

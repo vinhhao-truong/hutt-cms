@@ -1,4 +1,4 @@
-import getProductListFromCategories from "@/frontend-src/libs/utils/get/getProductListFromCategories";
+import getProductListFromCategories from "@/libs/utils/get/getProductListFromCategories";
 import { AfterReadHook } from "node_modules/payload/dist/globals/config/types";
 
 const addFeaturedCategories: AfterReadHook = async ({

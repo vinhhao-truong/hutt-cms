@@ -5,7 +5,7 @@ import Link from "next/link";
 import React from "react";
 import ProductCarousel from "./ProductCarousel";
 import { motion } from "framer-motion";
-import color, { colorRgba } from "@/frontend-src/libs/constants/color";
+import color, { colorRgba } from "@/libs/constants/color";
 import FadeIn from "@/frontend-src/components/animated/FadeIn";
 import { v4 } from "uuid";
 

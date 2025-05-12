@@ -20,6 +20,7 @@ import Footer from "./globals/Footer";
 import Videos from "./media-collections/Videos";
 import Spreadsheets from "./media-collections/Spreadsheets";
 import UpdateProductList from "./globals/UpdateProductList";
+import Hashtags from "./collections/Hashtags";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -43,6 +44,7 @@ export default buildConfig({
     Brands,
     Categories,
     Subcategories,
+    Hashtags,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
