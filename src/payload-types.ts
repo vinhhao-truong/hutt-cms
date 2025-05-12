@@ -251,8 +251,8 @@ export interface Product {
     weight?: number | null;
     height?: number | null;
     capacity?: number | null;
-    aboveRadius?: number | null;
-    belowRadius?: number | null;
+    aboveDiameter?: number | null;
+    belowDiameter?: number | null;
     thickness?: number | null;
   };
   enableVariations?: boolean | null;
@@ -518,8 +518,8 @@ export interface ProductsSelect<T extends boolean = true> {
         weight?: T;
         height?: T;
         capacity?: T;
-        aboveRadius?: T;
-        belowRadius?: T;
+        aboveDiameter?: T;
+        belowDiameter?: T;
         thickness?: T;
       };
   enableVariations?: T;

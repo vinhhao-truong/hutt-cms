@@ -16,6 +16,7 @@ import Description from "./Common/Description";
 import exportXlsx from "@/custom-api-endpoint-handlers/product/export-xlsx";
 import Hashtag from "./Common/Hashtag";
 import Usage from "./Common/Usage";
+import { Hashtag as HashtagType } from "@/payload-types";
 
 const Products: CollectionConfig = {
   slug: "products",
@@ -98,6 +99,11 @@ const Products: CollectionConfig = {
       ({ doc, req }) => {
         if (!req.user) {
           delete doc.costs;
+        }
+        if (doc?.hashtag) {
+          doc.hashtag = doc.hashtag?.map((h: HashtagType) => {
+            return h.hashtag;
+          });
         }
         return doc;
       },

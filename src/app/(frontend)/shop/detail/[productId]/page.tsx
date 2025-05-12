@@ -3,8 +3,13 @@ import config from "@/payload.config";
 import { getPayload } from "payload";
 import { redirect } from "next/navigation";
 import ProductDetail from "@/frontend-src/components/pages/shop/detail/ProductDetail";
+import { Product } from "@/payload-types";
 
 export const dynamic = "force-dynamic";
+
+export interface RenderedProductDetailType extends Omit<Product, "hashtag"> {
+  hashtag?: string[];
+}
 
 const ProductDetailPage = async ({
   params,
@@ -28,7 +33,7 @@ const ProductDetailPage = async ({
 
   return (
     <div className="">
-      <ProductDetail data={productData} />
+      <ProductDetail data={productData as RenderedProductDetailType} />
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur ut
         neque rem eius vel fuga nam aliquam cumque eos consequuntur voluptas

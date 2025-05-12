@@ -14,6 +14,7 @@ const Hashtags: CollectionConfig = {
       name: "hashtag",
       type: "text",
       required: true,
+      unique: true,
     },
     {
       name: "productList",
