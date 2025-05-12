@@ -256,7 +256,6 @@ export interface Product {
   };
   prices?: {
     grossPrice?: number | null;
-    netPrice?: number | null;
   };
   variations?:
     | {
@@ -268,7 +267,6 @@ export interface Product {
         };
         pricesVariation?: {
           grossPriceVariation?: number | null;
-          netPriceVariation?: number | null;
         };
       }[]
     | null;
@@ -283,6 +281,7 @@ export interface Brand {
   id: number;
   brandName: string;
   brandCode?: string | null;
+  shortDescription?: string | null;
   productList?: {
     docs?: (number | Product)[];
     hasNextPage?: boolean;
@@ -507,7 +506,6 @@ export interface ProductsSelect<T extends boolean = true> {
     | T
     | {
         grossPrice?: T;
-        netPrice?: T;
       };
   variations?:
     | T
@@ -524,7 +522,6 @@ export interface ProductsSelect<T extends boolean = true> {
           | T
           | {
               grossPriceVariation?: T;
-              netPriceVariation?: T;
             };
       };
   updatedAt?: T;
@@ -537,6 +534,7 @@ export interface ProductsSelect<T extends boolean = true> {
 export interface BrandsSelect<T extends boolean = true> {
   brandName?: T;
   brandCode?: T;
+  shortDescription?: T;
   productList?: T;
   updatedAt?: T;
   createdAt?: T;

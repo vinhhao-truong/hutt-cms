@@ -23,7 +23,7 @@ const FooterClient: React.FC<{
   return isHidden ? (
     <></>
   ) : (
-    <footer className="lg:grid lg:grid-cols-10 border-t border-gray-400">
+    <footer className="lg:grid lg:grid-cols-10 border-y border-gray-400">
       {/* LEFT */}
       <div className="flex flex-col items-center justify-between col-span-4 py-6 lg:border-r border-r-gray-400">
         <Link

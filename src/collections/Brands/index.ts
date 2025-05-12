@@ -45,6 +45,14 @@ const Brands: CollectionConfig = {
       ],
     },
     {
+      name: "shortDescription",
+      type: "textarea",
+      label: {
+        en: "Short Description",
+        vi: "Mô Tả Ngắn",
+      },
+    },
+    {
       name: "productList",
       type: "join",
       collection: "products",

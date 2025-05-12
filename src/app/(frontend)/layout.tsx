@@ -36,7 +36,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
     );
   }
 
-  const hideLayoutPages = ["/product-bulk-update"];
+  const hideLayoutPages = ["/product-bulk-update", "/loading"];
 
   return (
     <html lang="en">

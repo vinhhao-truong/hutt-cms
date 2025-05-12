@@ -5,13 +5,19 @@ const getPriceField = (
   en: string,
   vi: string,
   required: boolean = true,
-  isVariation: boolean = false
+  isVariation: boolean = false,
+  readOnly: boolean = false
+  // other?: Field
 ): Field => {
+  // const otherFields = other ? other : {};
+
   return {
+    // ...otherFields,
     name: `${name}${isVariation ? "Variation" : ""}`,
     type: "number",
     admin: {
       components: { Field: "/custom-fields/CustomVNDField" },
+      readOnly,
     },
     label: {
       en,
@@ -21,24 +27,22 @@ const getPriceField = (
 };
 
 const getPriceGroup = (isVariation?: boolean): Field => {
-  const GrossPrice = getPriceField(
-    "grossPrice",
-    "Gross Price",
-    "Giá Bán Gốc",
-    true,
-    isVariation
-  );
-  const NetPrice = getPriceField(
-    "netPrice",
-    "Net Price",
-    "Giá Bán Cuối",
-    false,
-    isVariation
-  );
   return {
     name: `prices${isVariation ? "Variation" : ""}`,
     type: "group",
-    fields: [GrossPrice, NetPrice],
+    fields: [
+      {
+        name: `grossPrice${isVariation ? "Variation" : ""}`,
+        type: "number",
+        admin: {
+          components: { Field: "/custom-fields/CustomVNDField" },
+        },
+        label: {
+          en: "Gross Price",
+          vi: "Giá Bán Gốc",
+        },
+      },
+    ],
     label: {
       en: "Prices",
       vi: "Giá Bán",
