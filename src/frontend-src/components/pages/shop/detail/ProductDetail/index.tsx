@@ -7,6 +7,7 @@ import Right from "./Right";
 import { RenderedProductDetailType } from "@/app/(frontend)/shop/detail/[productId]/page";
 import Slider from "react-slick";
 import { motion } from "framer-motion";
+import useResponsive from "@/frontend-hooks/useResponsive";
 
 const imgs = [
   `https://images.pexels.com/photos/1566308/pexels-photo-1566308.jpeg`,
@@ -18,15 +19,20 @@ const ProductDetail: React.FC<{ data: RenderedProductDetailType }> = ({
   data,
 }) => {
   const [currentImg, setCurrentImg] = useState<number>(0);
+  const responsive = useResponsive();
+  const bigScreen = ["2xl"].includes(responsive);
+  const desktop = ["lg", "xl"].includes(responsive);
+
   return (
     <div className="relative grid grid-cols-3">
       {/* LEFT */}
       <div className="relative col-span-2 pt-[100px]">
         <Slider
           // dots={true}
-          infinite={true}
+          // infinite={true}
+          infinite={false}
           centerMode
-          centerPadding="200px"
+          centerPadding={bigScreen ? "400px" : desktop ? "200px" : "50px"}
           slidesToShow={1}
           slidesToScroll={1}
           speed={700}
