@@ -3,7 +3,7 @@
 import { HomePageDataTypes } from "@/app/(frontend)/page";
 import Link from "next/link";
 import React from "react";
-import ProductCarousel from "./ProductCarousel";
+import ProductCarousel from "../../../common/ProductCarousel";
 import { motion } from "framer-motion";
 import color, { colorRgba } from "@/libs/constants/color";
 import FadeIn from "@/frontend-src/components/animated/FadeIn";
@@ -35,7 +35,7 @@ const FeaturedCategories: React.FC<{
           return (
             <li className="" key={key}>
               <FadeIn>
-                <div className="relative flex items-end justify-between mx-6 my-6">
+                {/* <div className="relative flex items-end justify-between mx-6 my-6">
                   <div className="absolute w-12 h-[3px] lg:h-1 bg-black left-6 -bottom-3"></div>
                   <div className="flex items-center">
                     <h2 className="mr-4 text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight uppercase">
@@ -44,9 +44,6 @@ const FeaturedCategories: React.FC<{
                         [{prods?.length}]
                       </sup>
                     </h2>
-                    {/* <div className="w-[90px] -translate-y-[6px]">
-                      <HuttLogo />
-                    </div> */}
                   </div>
 
                   <MotionLink
@@ -65,9 +62,14 @@ const FeaturedCategories: React.FC<{
                   >
                     XEM TẤT CẢ
                   </MotionLink>
-                </div>
+                </div> */}
                 {/* <Link href={`/${slug}`}>test</Link> */}
-                <ProductCarousel data={prods ?? []} key={v4()} />
+                <ProductCarousel
+                  title={category}
+                  seeAllUrl={`shop/category/${slug}`}
+                  data={prods ?? []}
+                  key={v4()}
+                />
               </FadeIn>
             </li>
           );

@@ -80,7 +80,7 @@ const Navigation: React.FC<{ hideLayoutPages?: string[] }> = ({
   ) : (
     <>
       <motion.header
-        initial={{ backgroundColor: "rgba(255, 255, 255, 0.9)" }}
+        initial={{ backgroundColor: "rgba(255, 255, 255, 0.3)" }}
         whileHover={{
           backgroundColor: "rgba(255, 255, 255, 1)",
         }}

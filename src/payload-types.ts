@@ -248,6 +248,7 @@ export interface Product {
   usage?: string | null;
   hashtag?: (number | Hashtag)[] | null;
   specifications?: {
+    qtyPerPack?: number | null;
     weight?: number | null;
     height?: number | null;
     capacity?: number | null;
@@ -288,7 +289,9 @@ export interface Brand {
   id: number;
   brandName: string;
   brandCode?: string | null;
+  slug?: string | null;
   shortDescription?: string | null;
+  country?: ('china' | 'thailand' | 'vietnam') | null;
   productList?: {
     docs?: (number | Product)[];
     hasNextPage?: boolean;
@@ -515,6 +518,7 @@ export interface ProductsSelect<T extends boolean = true> {
   specifications?:
     | T
     | {
+        qtyPerPack?: T;
         weight?: T;
         height?: T;
         capacity?: T;
@@ -562,7 +566,9 @@ export interface ProductsSelect<T extends boolean = true> {
 export interface BrandsSelect<T extends boolean = true> {
   brandName?: T;
   brandCode?: T;
+  slug?: T;
   shortDescription?: T;
+  country?: T;
   productList?: T;
   updatedAt?: T;
   createdAt?: T;

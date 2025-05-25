@@ -8,10 +8,10 @@ const HomeHeroBanner: React.FC<{
   data: HomePageDataTypes["shopAllBanner"];
 }> = () => {
   return (
-    <div className="relative w-full h-[90vh]">
+    <div className="relative w-full h-screen">
       <div className="absolute w-full h-full">
         <Image
-          src={`https://images.pexels.com/photos/1566308/pexels-photo-1566308.jpeg`}
+          src={`https://images5.alphacoders.com/131/1311515.jpeg`}
           alt="home-hero-banner"
           fill
           sizes="auto"

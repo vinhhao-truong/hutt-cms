@@ -11,7 +11,7 @@ const getCostField = (
     name: costName,
     type: "number",
     admin: {
-      components: { Field: "/custom-fields/CustomVNDField" },
+      // components: { Field: "/custom-fields/CustomVNDField" },
     },
     label: {
       en,

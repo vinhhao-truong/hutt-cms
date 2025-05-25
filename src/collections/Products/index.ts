@@ -100,11 +100,11 @@ const Products: CollectionConfig = {
         if (!req.user) {
           delete doc.costs;
         }
-        if (doc?.hashtag) {
-          doc.hashtag = doc.hashtag?.map((h: HashtagType) => {
-            return h.hashtag;
-          });
-        }
+        // if (doc?.hashtag) {
+        //   doc.hashtag = doc.hashtag?.map((h: HashtagType) => {
+        //     return h.hashtag;
+        //   });
+        // }
         return doc;
       },
     ],

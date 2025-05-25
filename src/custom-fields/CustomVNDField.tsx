@@ -3,6 +3,7 @@
 import React, { useEffect, useMemo } from "react";
 import { useField, NumberField } from "@payloadcms/ui";
 import { NumberFieldClientComponent } from "payload";
+import { formatVNCurrency } from "@/libs/utils/format/formatNumberToString";
 
 const CustomVNDField: NumberFieldClientComponent = ({
   path,
@@ -14,10 +15,7 @@ const CustomVNDField: NumberFieldClientComponent = ({
   const vnd = useMemo(() => {
     const result = String(value);
 
-    return new Intl.NumberFormat("vi-VN", {
-      style: "currency",
-      currency: "VND",
-    }).format(parseFloat(result));
+    return formatVNCurrency(parseFloat(result));
   }, [value]);
 
   return (

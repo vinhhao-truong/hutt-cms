@@ -16,6 +16,12 @@ const getSpecs = (
   };
 };
 
+const QtyPerPack = getSpecs(
+  "qtyPerPack",
+  "/",
+  "Số Luọng / Gói",
+  "Qty Per Pack"
+);
 const Weight = getSpecs("weight", "g", "Khối Lượng");
 const Height = getSpecs("height", "cm", "Chiều Cao");
 const Capacity = getSpecs("capacity", "ml", "Dung Tích");
@@ -37,6 +43,10 @@ const Specifications: Field = {
   name: "specifications",
   type: "group",
   fields: [
+    {
+      type: "row",
+      fields: [QtyPerPack],
+    },
     {
       type: "row",
       fields: [Weight, Height, Capacity],

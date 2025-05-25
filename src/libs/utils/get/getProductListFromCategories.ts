@@ -22,8 +22,10 @@ const getProductListFromCategories = async (
       for (let j = 0; j < sub.length; j++) {
         // @ts-ignore
         const prods = sub[j]?.productList?.docs;
-        result[categories.docs[i]?.categoryName ?? ""].push(...prods);
-        allIds.push(...prods);
+        if (!!prods) {
+          result[categories.docs[i]?.categoryName ?? ""].push(...prods);
+          allIds.push(...prods);
+        }
       }
     }
   }
@@ -63,13 +65,16 @@ const getProductListFromCategories = async (
 
   for (let i = 0; i < Object.keys(result).length; i++) {
     const val = result[Object.keys(result)[i]];
-    const prods = val?.map((p: string) => {
+    const prods = val
+      ?.map((p: string) => {
+        // @ts-ignore
+        const prod = prodsObj?.[p];
+        // @ts-ignore
+        delete prodsObj?.[p];
+        return prod;
+      })
       // @ts-ignore
-      const prod = prodsObj?.[p];
-      // @ts-ignore
-      delete prodsObj?.[p];
-      return prod;
-    });
+      ?.filter((p) => !!p);
     result[Object.keys(result)[i]] = {
       slug: categories.docs[i]?.slug,
       products: prods,
@@ -79,7 +84,7 @@ const getProductListFromCategories = async (
   if (includesOther) {
     result["Khác"] = {
       slug: "khac",
-      products: Object.values(prodsObj),
+      products: [...Object.values(prodsObj)],
     };
   }
 

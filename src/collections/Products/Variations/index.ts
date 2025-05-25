@@ -64,9 +64,9 @@ const Variations: Field = {
     getPriceGroup(true),
   ],
   admin: {
-    components: {
-      RowLabel: "/custom-fields/LabelledArrayRow",
-    },
+    // components: {
+    //   RowLabel: "/custom-fields/LabelledArrayRow",
+    // },
   },
 };
 

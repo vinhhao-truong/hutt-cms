@@ -72,9 +72,6 @@ export default async function exportXlsx(
 
     const worksheet = xlsxUtils.json_to_sheet(finalData);
 
-    console.log("p", JSON.stringify(products, null, 2));
-    console.log("f", JSON.stringify(finalData, null, 2));
-
     const workbook = xlsxUtils.book_new();
     xlsxUtils.book_append_sheet(workbook, worksheet, "Products");
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { RenderedProductDetailType } from "@/app/(frontend)/shop/detail/[productId]/page";
+import { formatVNCurrency } from "@/libs/utils/format/formatNumberToString";
 import checkColorDakLight from "@/libs/utils/get/checkColorDarkLight";
 import getHexFromString from "@/libs/utils/get/getHexFromString";
 import { Product } from "@/payload-types";
@@ -9,14 +10,11 @@ import React from "react";
 
 const Right: React.FC<{ data: RenderedProductDetailType }> = ({ data }) => {
   const price = data?.prices?.grossPrice
-    ? new Intl.NumberFormat("vi-VN", {
-        style: "currency",
-        currency: "VND",
-      }).format(data?.prices?.grossPrice)
+    ? formatVNCurrency(data?.prices?.grossPrice)
     : "LIÊN HỆ";
 
   return (
-    <div className="sticky top-0 pt-[100px] pb-12 px-8">
+    <div className="sticky top-0 pt-[100px] pb-[68px] px-12 2xl:px-16">
       <h1 className="text-4xl font-bold text-right uppercase mb-6">
         {data.productName}
       </h1>
@@ -29,9 +27,13 @@ const Right: React.FC<{ data: RenderedProductDetailType }> = ({ data }) => {
         <h3 className="text-2xl font-light text-system-blue-5">LIÊN HỆ</h3>
       </div>
 
-      <p className="font-light text-justify mb-6">{data.shortDescription}</p>
+      {/* <p className="font-medium text-lg mb-6">{data.shortDescription}</p> */}
       <ul className="flex items-center gap-1">
-        {data?.hashtag?.map((h) => {
+        {data?.hashtag?.map((hashtag) => {
+          if (typeof hashtag === "number") {
+            return <li className="" key={`hashtag-${hashtag}`}></li>;
+          }
+          const h = hashtag.hashtag;
           const hex = getHexFromString(h);
 
           return (

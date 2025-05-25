@@ -11,6 +11,7 @@ import Image from "next/image";
 import HuttLogo from "@/assets/images/logo";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import useResponsive from "@/frontend-hooks/useResponsive";
+import { formatVNNumber } from "@/libs/utils/format/formatNumberToString";
 
 const AllCategories: React.FC<{
   data: HomePageDataTypes["allCategories"];
@@ -96,6 +97,18 @@ const AllCategories: React.FC<{
             {data.categories?.[selected]?.products?.map((p, idx) => {
               const key = `${p.id}-${p.productName}-${idx}`;
               const isHovered = p.id === hoveredItemId;
+              const price = new Intl.NumberFormat("vi-VN").format(
+                p?.prices?.grossPrice ?? 0
+              );
+              const specs = p?.specifications;
+              const capacityStr = specs?.capacity
+                ? `${formatVNNumber(specs?.capacity)}ml / `
+                : ``;
+              const sizesStr = `${formatVNNumber(specs?.aboveDiameter ?? NaN)}cm x ${formatVNNumber(specs?.height ?? NaN)}cm`;
+              const weightStr = specs?.weight
+                ? ` / ${formatVNNumber(specs?.weight)}g`
+                : ``;
+              const renderedSpecs = `${capacityStr}${sizesStr}${weightStr}`;
 
               return (
                 <li className="aspect-[2/3] relative lg:w-[200px]" key={key}>
@@ -124,7 +137,7 @@ const AllCategories: React.FC<{
                       <h3 className="text-lg font-semibold truncate">
                         {p.productName}
                       </h3>
-                      <p className="text-[10px] mb-2">150ml / 15cm x 10cm</p>
+                      <p className="text-[10px] mb-2">{renderedSpecs}</p>
                       <Image
                         src="https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-m250pw14sy3fc4.webp"
                         alt={key}
@@ -144,11 +157,13 @@ const AllCategories: React.FC<{
                       >
                         <p className="">xem thêm</p>
                         <h3 className="">
-                          20.000<sup>đ</sup>
+                          {price}
+                          <sup>đ</sup>
                         </h3>
                       </motion.div>
                       <h3 className="text-sm mt-1 font-medium md:hidden">
-                        20.000<sup>đ</sup>
+                        {price}
+                        <sup>đ</sup>
                       </h3>
                     </MotionLink>
                   </FadeIn>

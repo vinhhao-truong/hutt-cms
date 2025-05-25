@@ -118,8 +118,6 @@ const UploadProducts = () => {
 
       const finalObject: Product[] = [...uniqueProdsMap.values()];
 
-      console.log(finalObject);
-      console.log(JSON.stringify(finalObject));
       try {
         await Promise.all(finalObject.map((p) => createProdPayload(p)));
         console.log("uploaded");

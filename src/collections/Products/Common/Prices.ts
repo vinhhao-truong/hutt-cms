@@ -16,7 +16,7 @@ const getPriceField = (
     name: `${name}${isVariation ? "Variation" : ""}`,
     type: "number",
     admin: {
-      components: { Field: "/custom-fields/CustomVNDField" },
+      // components: { Field: "/custom-fields/CustomVNDField" },
       readOnly,
     },
     label: {
@@ -35,7 +35,7 @@ const getPriceGroup = (isVariation?: boolean): Field => {
         name: `grossPrice${isVariation ? "Variation" : ""}`,
         type: "number",
         admin: {
-          components: { Field: "/custom-fields/CustomVNDField" },
+          // components: { Field: "/custom-fields/CustomVNDField" },
         },
         label: {
           en: "Gross Price",
