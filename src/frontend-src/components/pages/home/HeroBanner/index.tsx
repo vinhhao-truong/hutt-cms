@@ -11,7 +11,7 @@ const HomeHeroBanner: React.FC<{
     <div className="relative w-full h-screen">
       <div className="absolute w-full h-full">
         <Image
-          src={`https://images5.alphacoders.com/131/1311515.jpeg`}
+          src={`https://images2.alphacoders.com/127/1272143.jpg`}
           alt="home-hero-banner"
           fill
           sizes="auto"

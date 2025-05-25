@@ -10,10 +10,10 @@ import Country from "./Country";
 
 const Left: React.FC<{ data: RenderedProductDetailType }> = ({ data }) => {
   const leftSection = [
-    <Specifications specifications={data?.specifications} />,
-    <Brand brand={data?.brand} />,
-    <Country brand={data?.brand} />,
-    <Usage usage={data?.usage} />,
+    <Specifications key={`left-specs`} specifications={data?.specifications} />,
+    <Brand key={`left-brand`} brand={data?.brand} />,
+    <Country key={`left-country`} brand={data?.brand} />,
+    <Usage key={`left-usage`} usage={data?.usage} />,
   ];
 
   return (
