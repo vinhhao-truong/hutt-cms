@@ -9,6 +9,7 @@ import Slider from "react-slick";
 import { motion } from "framer-motion";
 import useResponsive from "@/frontend-hooks/useResponsive";
 import Left from "./Left";
+import HuttLogo from "@/assets/images/logo";
 
 const ProductDetail: React.FC<{ data: RenderedProductDetailType }> = ({
   data,
@@ -22,6 +23,9 @@ const ProductDetail: React.FC<{ data: RenderedProductDetailType }> = ({
       {/* RIGHT */}
       <div className="col-span-1 relative h-full border-l border-l-gray-400">
         <Right data={data} />
+        <div className="absolute bottom-28 left-0 w-60 h-24 grayscale opacity-10 rotate-90">
+          <HuttLogo />
+        </div>
       </div>
     </div>
   );

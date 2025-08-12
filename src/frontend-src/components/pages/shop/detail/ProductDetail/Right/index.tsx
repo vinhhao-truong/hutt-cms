@@ -14,7 +14,7 @@ const Right: React.FC<{ data: RenderedProductDetailType }> = ({ data }) => {
     : "LIÊN HỆ";
 
   return (
-    <div className="sticky top-0 pt-[100px] pb-[68px] px-12 2xl:px-16">
+    <div className="sticky top-0 pt-[100px] pb-[68px] px-12 2xl:px-16 z-[1] bg-gradient-to-b from-white via-white to-transparent">
       <h1 className="text-4xl font-bold text-right uppercase mb-6">
         {data.productName}
       </h1>
