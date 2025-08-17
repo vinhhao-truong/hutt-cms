@@ -16,16 +16,31 @@ const ImageGallery = () => {
   const [currentImg, setCurrentImg] = useState<number>(0);
 
   const responsive = useResponsive();
-  const bigScreen = ["2xl"].includes(responsive);
-  const desktop = ["lg", "xl"].includes(responsive);
+  const is2xl = responsive === "2xl";
+  const isLg = responsive === "lg";
+  const isXl = responsive === "xl";
+  const isMd = responsive === "md";
+
+  console.log("responsive", responsive);
 
   return (
     <Slider
       // dots={true}
       // infinite={true}
+      arrows={false}
       infinite={false}
       centerMode
-      centerPadding={bigScreen ? "400px" : desktop ? "200px" : "50px"}
+      centerPadding={
+        is2xl
+          ? "500px"
+          : isXl
+            ? "300px"
+            : isLg
+              ? "200px"
+              : isMd
+                ? "150px"
+                : "50px"
+      }
       slidesToShow={1}
       slidesToScroll={1}
       speed={700}
@@ -52,7 +67,7 @@ const ImageGallery = () => {
                 : { opacity: 0.9, scale: 0.92, borderRadius: 6 }
             }
             whileHover={isCurrent ? {} : { opacity: 0.95 }}
-            className={`cursor-pointer relative aspect-square w-1/3 overflow-hidden mt-[100px]`}
+            className={`cursor-pointer relative aspect-square w-1/3 xl:w-[calc(70vh/3)] overflow-hidden mt-[100px]`}
             key={`img-${idx}-${img}`}
           >
             <Image
@@ -60,7 +75,7 @@ const ImageGallery = () => {
               alt="home-hero-banner"
               fill
               sizes="auto"
-              className="relative object-cover"
+              className="relative object-cover w-full h-full"
             />
           </motion.div>
         );

@@ -7,6 +7,7 @@ import getHexFromString from "@/libs/utils/get/getHexFromString";
 import { Product } from "@/payload-types";
 import Link from "next/link";
 import React from "react";
+import HuttLogo from "@/assets/images/logo";
 
 const Right: React.FC<{ data: RenderedProductDetailType }> = ({ data }) => {
   const price = data?.prices?.grossPrice
@@ -15,20 +16,27 @@ const Right: React.FC<{ data: RenderedProductDetailType }> = ({ data }) => {
 
   return (
     <div className="sticky top-0 pt-[100px] pb-[68px] px-12 2xl:px-16 z-[1] bg-gradient-to-b from-white via-white to-transparent">
-      <h1 className="text-4xl font-bold text-right uppercase mb-6">
+      <h1 className="text-3xl font-bold text-center uppercase mb-2">
         {data.productName}
       </h1>
-      <div className="flex justify-between items-end mb-4 px-2 border-x-[8px] border-system-green-6">
-        <p className="text-sm text-gray-500">Giá bán lẻ:</p>
-        <h3 className="text-2xl font-light text-system-green-6">{price}</h3>
+      <h2 className="text-center text-lg text-gray-400 italic mb-6">
+        SL / gói: <b>{data?.specifications?.qtyPerPack || "N/A"} cái</b>
+      </h2>
+      <div className="flex flex-col gap-1 items-center mb-4">
+        <p className="text-sm text-gray-500">Giá bán lẻ</p>
+        <h3 className="text-2xl 2xl:text-4xl w-full text-white bg-system-green-6 p-3 text-center rounded-full">
+          {price}
+        </h3>
       </div>
-      <div className="flex justify-between items-end mb-8 px-2 border-x-[8px] border-system-blue-5">
-        <p className="text-sm text-gray-500">Giá bán sỉ:</p>
-        <h3 className="text-2xl font-light text-system-blue-5">LIÊN HỆ</h3>
+      <div className="flex flex-col gap-1 items-center">
+        <p className="text-sm text-gray-500">Giá bán sỉ</p>
+        <h3 className="text-2xl 2xl:text-4xl w-full text-white bg-system-blue-6 p-3 text-center rounded-full">
+          LIÊN HỆ
+        </h3>
       </div>
 
       {/* <p className="font-medium text-lg mb-6">{data.shortDescription}</p> */}
-      <ul className="flex items-center gap-1">
+      <ul className="flex items-center gap-1 mt-16">
         {data?.hashtag?.map((hashtag) => {
           if (typeof hashtag === "number") {
             return <li className="" key={`hashtag-${hashtag}`}></li>;

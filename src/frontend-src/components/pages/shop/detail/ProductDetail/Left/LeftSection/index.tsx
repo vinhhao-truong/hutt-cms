@@ -7,7 +7,7 @@ const LeftSection: React.FC<{ title?: string; children?: React.ReactNode }> = ({
   children,
 }) => {
   return (
-    <div className="relative w-full h-full px-12 py-5">
+    <div className="relative w-full h-full px-6 md:px-12 py-5">
       <h2 className="mb-4 font-light text-lg">{title} _</h2>
       {children}
     </div>
