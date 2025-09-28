@@ -1,6 +1,6 @@
 "use client";
 
-import ProductCarousel from "@/frontend-src/components/common/ProductCarousel";
+import ProductCarousel from "@/libs/frontend-src/components/common/ProductCarousel";
 import { Product } from "@/payload-types";
 import React from "react";
 

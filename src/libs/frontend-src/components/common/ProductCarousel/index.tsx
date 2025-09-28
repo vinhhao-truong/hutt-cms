@@ -145,7 +145,8 @@ const ProductCarousel: React.FC<{
   data: Product[];
   title: string;
   seeAllUrl?: string;
-}> = ({ data, title, seeAllUrl }) => {
+  hasCount?: boolean;
+}> = ({ data, title, seeAllUrl, hasCount = true }) => {
   if (data.length === 0) {
     return <></>;
   }
@@ -159,9 +160,11 @@ const ProductCarousel: React.FC<{
         <div className="flex items-center">
           <h2 className="mr-4 text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight uppercase">
             {title}{" "}
-            <sup className="text-sm lg:text-base -translate-y-24">
-              [{data?.length}]
-            </sup>
+            {hasCount && (
+              <sup className="text-sm lg:text-base -translate-y-24">
+                [{data?.length}]
+              </sup>
+            )}
           </h2>
           {/* <div className="w-[90px] -translate-y-[6px]">
                       <HuttLogo />

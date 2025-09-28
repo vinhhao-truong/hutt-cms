@@ -1,7 +1,7 @@
 "use client";
 
 import { HomePageDataTypes } from "@/app/(frontend)/page";
-import PageContainer from "@/frontend-src/components/layout/PageContainer";
+import PageContainer from "@/libs/frontend-src/components/layout/PageContainer";
 import React from "react";
 
 const Introduction: React.FC<{

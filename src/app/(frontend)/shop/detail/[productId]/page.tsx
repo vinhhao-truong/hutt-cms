@@ -2,9 +2,9 @@ import React from "react";
 import config from "@/payload.config";
 import { getPayload } from "payload";
 import { redirect } from "next/navigation";
-import ProductDetail from "@/frontend-src/components/pages/shop/detail/ProductDetail";
+import ProductDetail from "@/libs/frontend-src/components/pages/shop/detail/ProductDetail";
 import { Product } from "@/payload-types";
-import RelatedProducts from "@/frontend-src/components/pages/shop/detail/RelatedProducts";
+import RelatedProducts from "@/libs/frontend-src/components/pages/shop/detail/RelatedProducts";
 
 export const dynamic = "force-dynamic";
 

@@ -6,7 +6,7 @@ import React from "react";
 import ProductCarousel from "../../../common/ProductCarousel";
 import { motion } from "framer-motion";
 import color, { colorRgba } from "@/libs/constants/color";
-import FadeIn from "@/frontend-src/components/animated/FadeIn";
+import FadeIn from "@/libs/frontend-src/components/animated/FadeIn";
 import { v4 } from "uuid";
 
 const FeaturedCategories: React.FC<{

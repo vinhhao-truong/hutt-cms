@@ -1,13 +1,13 @@
 import { getPayload } from "payload";
 import React from "react";
 import config from "@/payload.config";
-import HomeHeroBanner from "@/frontend-src/components/pages/home/HeroBanner";
+import HomeHeroBanner from "@/libs/frontend-src/components/pages/home/HeroBanner";
 import { HomePage as HomePageTypes, Product } from "@/payload-types";
-import FeaturedCategories from "@/frontend-src/components/pages/home/FeaturedCategories";
-import Introduction from "@/frontend-src/components/pages/home/Introduction";
-import AllCategories from "@/frontend-src/components/pages/home/AllCategories";
-import ShopAllBanner from "@/frontend-src/components/pages/home/ShopAllBanner";
-import ConstructionPage from "@/frontend-src/components/pages/construction/ConstructionPage";
+import FeaturedCategories from "@/libs/frontend-src/components/pages/home/FeaturedCategories";
+import Introduction from "@/libs/frontend-src/components/pages/home/Introduction";
+import AllCategories from "@/libs/frontend-src/components/pages/home/AllCategories";
+import ShopAllBanner from "@/libs/frontend-src/components/pages/home/ShopAllBanner";
+import ConstructionPage from "@/libs/frontend-src/components/pages/construction/ConstructionPage";
 import { headers as nextHeaders } from "next/headers";
 
 export interface HomePageDataTypes

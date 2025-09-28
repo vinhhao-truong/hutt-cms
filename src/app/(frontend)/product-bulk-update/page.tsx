@@ -4,8 +4,8 @@ import { getPayload } from "payload";
 import config from "@/payload.config";
 import { headers as nextHeaders } from "next/headers";
 import { redirect } from "next/navigation";
-import DownloadButton from "@/frontend-src/components/pages/product-bulk-update/DownloadButton";
-import UploadProducts from "@/frontend-src/components/pages/product-bulk-update/UploadProducts";
+import DownloadButton from "@/libs/frontend-src/components/pages/product-bulk-update/DownloadButton";
+import UploadProducts from "@/libs/frontend-src/components/pages/product-bulk-update/UploadProducts";
 
 const ProductBulkUpdatePage = async () => {
   const payloadConfig = await config;

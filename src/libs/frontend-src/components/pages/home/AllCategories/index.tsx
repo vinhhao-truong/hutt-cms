@@ -1,7 +1,7 @@
 "use client";
 
 import { HomePageDataTypes } from "@/app/(frontend)/page";
-import FadeIn from "@/frontend-src/components/animated/FadeIn";
+import FadeIn from "@/libs/frontend-src/components/animated/FadeIn";
 import color from "@/libs/constants/color";
 import tailwindData from "@/libs/constants/tailwindData";
 import { motion } from "framer-motion";

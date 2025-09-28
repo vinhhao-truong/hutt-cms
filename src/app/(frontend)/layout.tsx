@@ -1,10 +1,10 @@
 import React from "react";
-import Navigation from "@/frontend-src/components/layout/Navigation";
-import Footer from "@/frontend-src/components/layout/Footer";
+import Navigation from "@/libs/frontend-src/components/layout/Navigation";
+import Footer from "@/libs/frontend-src/components/layout/Footer";
 import "./style.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import ConstructionPage from "@/frontend-src/components/pages/construction/ConstructionPage";
+import ConstructionPage from "@/libs/frontend-src/components/pages/construction/ConstructionPage";
 import { getPayload } from "payload";
 import config from "@/payload.config";
 import axios from "axios";
