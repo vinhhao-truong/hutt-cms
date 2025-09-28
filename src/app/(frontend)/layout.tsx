@@ -9,6 +9,7 @@ import { getPayload } from "payload";
 import config from "@/payload.config";
 import axios from "axios";
 import { headers as nextHeaders } from "next/headers";
+import Link from "next/link";
 
 export const metadata = {
   description:
@@ -44,6 +45,14 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
         <Navigation hideLayoutPages={hideLayoutPages} />
         <main>{children}</main>
         <Footer hideLayoutPages={hideLayoutPages} />
+        {auth.user && (
+          <Link
+            href={"/design-system"}
+            className="w-full py-1 text-center text-white bg-black"
+          >
+            Design System
+          </Link>
+        )}
       </body>
     </html>
   );
